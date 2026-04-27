@@ -8,7 +8,8 @@ import {
 import { useNavigate } from 'react-router-dom';
 import {
   WHATSAPP_URL, TOURS, FEATURES, TIMELINE,
-  TESTIMONIALS, PRICING_PLANS, GALLERY_IMAGES,
+  TESTIMONIALS, PRICING_PLANS, GALLERY_IMAGES, GALLERY_AMBIANCE, GALLERY_VIDEOS,
+  type GalleryImage,
 } from '@/lib/index';
 
 // ─── Animation Variants ───────────────────────────────────────────────────────
@@ -183,11 +184,37 @@ export function WhyUsSection() {
 }
 
 // ─── GALLERY ──────────────────────────────────────────────────────────────────
+function PhotoGrid({ images, onOpen }: { images: GalleryImage[]; onOpen: (i: number) => void }) {
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[220px]">
+      {images.map((img, idx) => (
+        <motion.div
+          key={idx} variants={fadeUp}
+          onClick={() => onOpen(idx)}
+          className={`relative overflow-hidden rounded-2xl cursor-pointer group ${img.span === 'wide' ? 'col-span-2' : ''}`}
+        >
+          <img src={img.src} alt={img.alt} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+          <div className="absolute inset-0 bg-ocean-deep/0 group-hover:bg-ocean-deep/30 transition-colors duration-300 flex items-center justify-center">
+            <span className="text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">⊕</span>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
 export function GallerySection() {
+  const [tab, setTab] = useState<'drone' | 'ambiance' | 'videos'>('drone');
+  const [lightboxPool, setLightboxPool] = useState<GalleryImage[]>([]);
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
+
+  const openLightbox = (pool: GalleryImage[], idx: number) => {
+    setLightboxPool(pool);
+    setLightboxIdx(idx);
+  };
   const closeLightbox = () => setLightboxIdx(null);
-  const prevImage = () => setLightboxIdx((i) => (i === null ? 0 : (i - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length));
-  const nextImage = () => setLightboxIdx((i) => (i === null ? 0 : (i + 1) % GALLERY_IMAGES.length));
+  const prevImage = () => setLightboxIdx((i) => (i === null ? 0 : (i - 1 + lightboxPool.length) % lightboxPool.length));
+  const nextImage = () => setLightboxIdx((i) => (i === null ? 0 : (i + 1) % lightboxPool.length));
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -197,34 +224,79 @@ export function GallerySection() {
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, []);
+  }, [lightboxPool]);
+
+  const tabs = [
+    { key: 'drone',    label: '🚁 Vue du ciel' },
+    { key: 'ambiance', label: '🍹 Ambiance & Repas' },
+    { key: 'videos',   label: '🎬 Vidéos' },
+  ] as const;
 
   return (
     <Section id="gallery" className="py-24 px-4 bg-muted/30">
       <div className="max-w-7xl mx-auto">
-        <motion.div variants={fadeUp} className="text-center mb-16">
+        <motion.div variants={fadeUp} className="text-center mb-10">
           <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">Galerie</p>
           <h2 className="font-heading text-4xl md:text-5xl text-foreground mb-4">Vivez la Magie</h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
             Les photos ne font qu'effleurer la réalité. Mais elles vous feront ressentir quelque chose.
           </p>
         </motion.div>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[220px]">
-          {GALLERY_IMAGES.map((img, idx) => (
-            <motion.div
-              key={idx} variants={fadeUp}
-              onClick={() => setLightboxIdx(idx)}
-              className={`relative overflow-hidden rounded-2xl cursor-pointer group ${img.span === 'wide' ? 'col-span-2' : ''}`}
+
+        {/* Tabs */}
+        <motion.div variants={fadeUp} className="flex justify-center gap-3 mb-10 flex-wrap">
+          {tabs.map((t) => (
+            <button
+              key={t.key}
+              onClick={() => setTab(t.key)}
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 ${
+                tab === t.key
+                  ? 'text-white shadow-lg'
+                  : 'bg-card border border-border text-foreground hover:border-primary/40'
+              }`}
+              style={tab === t.key ? { background: 'linear-gradient(135deg, oklch(0.78 0.14 195), oklch(0.65 0.12 195))' } : {}}
             >
-              <img src={img.src} alt={img.alt} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
-              <div className="absolute inset-0 bg-ocean-deep/0 group-hover:bg-ocean-deep/30 transition-colors duration-300 flex items-center justify-center">
-                <span className="text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">⊕</span>
+              {t.label}
+            </button>
+          ))}
+        </motion.div>
+
+        <AnimatePresence mode="wait">
+          {tab === 'drone' && (
+            <motion.div key="drone" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.35 }}>
+              <PhotoGrid images={GALLERY_IMAGES} onOpen={(i) => openLightbox(GALLERY_IMAGES, i)} />
+            </motion.div>
+          )}
+          {tab === 'ambiance' && (
+            <motion.div key="ambiance" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.35 }}>
+              <PhotoGrid images={GALLERY_AMBIANCE} onOpen={(i) => openLightbox(GALLERY_AMBIANCE, i)} />
+            </motion.div>
+          )}
+          {tab === 'videos' && (
+            <motion.div key="videos" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.35 }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {GALLERY_VIDEOS.map((v, idx) => (
+                  <div key={idx} className="group relative rounded-2xl overflow-hidden bg-card border border-border shadow-sm hover:shadow-lg transition-shadow duration-300" style={{ aspectRatio: '9/16', maxHeight: '480px' }}>
+                    <video
+                      src={v.src}
+                      className="w-full h-full object-cover"
+                      controls
+                      playsInline
+                      preload="metadata"
+                      style={{ display: 'block' }}
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-black/70 to-transparent pointer-events-none">
+                      <p className="text-white text-sm font-medium">{v.label}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </motion.div>
-          ))}
-        </div>
+          )}
+        </AnimatePresence>
       </div>
 
+      {/* Lightbox */}
       <AnimatePresence>
         {lightboxIdx !== null && (
           <motion.div
@@ -238,8 +310,8 @@ export function GallerySection() {
               className="relative max-w-5xl w-full"
               onClick={(e) => e.stopPropagation()}
             >
-              <img src={GALLERY_IMAGES[lightboxIdx].src} alt={GALLERY_IMAGES[lightboxIdx].alt} className="w-full max-h-[85vh] object-contain rounded-2xl" />
-              <p className="text-center text-white/60 text-sm mt-3">{GALLERY_IMAGES[lightboxIdx].alt}</p>
+              <img src={lightboxPool[lightboxIdx].src} alt={lightboxPool[lightboxIdx].alt} className="w-full max-h-[85vh] object-contain rounded-2xl" />
+              <p className="text-center text-white/60 text-sm mt-3">{lightboxPool[lightboxIdx].alt}</p>
               <button onClick={closeLightbox} className="absolute -top-4 -right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-transform">
                 <X className="w-5 h-5 text-foreground" />
               </button>
@@ -249,8 +321,8 @@ export function GallerySection() {
               <button onClick={(e) => { e.stopPropagation(); nextImage(); }} className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/40 transition">
                 <ChevronRight className="w-6 h-6 text-white" />
               </button>
-              <div className="flex justify-center gap-2 mt-4">
-                {GALLERY_IMAGES.map((_, i) => (
+              <div className="flex justify-center gap-2 mt-4 flex-wrap">
+                {lightboxPool.map((_, i) => (
                   <button key={i} onClick={(e) => { e.stopPropagation(); setLightboxIdx(i); }} className={`h-2 rounded-full transition-all ${i === lightboxIdx ? 'bg-primary w-6' : 'bg-white/40 w-2'}`} />
                 ))}
               </div>

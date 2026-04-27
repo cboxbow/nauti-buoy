@@ -65,6 +65,12 @@ export interface GalleryImage {
   span?: 'wide' | 'tall' | 'normal';
 }
 
+export interface GalleryVideo {
+  src: string;
+  poster?: string;
+  label: string;
+}
+
 // ─── Tours Data ───────────────────────────────────────────────────────────────
 export const TOURS: Tour[] = [
   {
@@ -262,7 +268,7 @@ export const PRICING_PLANS: PricingPlan[] = [
   },
 ];
 
-// ─── Gallery Images ───────────────────────────────────────────────────────────
+// ─── Gallery Images — Vue du ciel (DJI drone) ────────────────────────────────
 export const GALLERY_IMAGES: GalleryImage[] = [
   { src: '/images/nb-1.jpg',  alt: 'Vue aérienne du lagon nord de Maurice', span: 'wide' },
   { src: '/images/nb-2.jpg',  alt: 'Bateau Nauti Buoy en mer', span: 'normal' },
@@ -277,4 +283,29 @@ export const GALLERY_IMAGES: GalleryImage[] = [
   { src: '/images/nb-11.jpg', alt: 'Coucher de soleil sur le lagon nord', span: 'normal' },
   { src: '/images/nb-12.jpg', alt: 'Vue panoramique de Cap Malheureux', span: 'normal' },
   { src: '/images/nb-13.jpg', alt: 'Journée complète — tous les îlots du nord', span: 'wide' },
+];
+
+// ─── Gallery Images — Ambiance & Moments ─────────────────────────────────────
+export const GALLERY_AMBIANCE: GalleryImage[] = [
+  { src: '/images/jenna-1.jpg',  alt: 'Nauti Buoy naviguant vers Coin de Mire', span: 'wide' },
+  { src: '/images/jenna-2.jpg',  alt: 'Le bateau longe la plage blanche', span: 'normal' },
+  { src: '/images/jenna-3.jpg',  alt: 'Départ depuis l\'église de Cap Malheureux', span: 'normal' },
+  { src: '/images/jenna-6.jpg',  alt: 'Plateau de langoustes grillées', span: 'wide' },
+  { src: '/images/jenna-7.jpg',  alt: 'Assiette langouste grillée, salade & pain', span: 'normal' },
+  { src: '/images/jenna-10.jpg', alt: 'Table BBQ dressée sur l\'île', span: 'normal' },
+  { src: '/images/jenna-8.jpg',  alt: 'Groupe de clients au déjeuner sur l\'île', span: 'wide' },
+  { src: '/images/jenna-9.jpg',  alt: 'Snorkeling en groupe dans le lagon', span: 'normal' },
+  { src: '/images/jenna-4.jpg',  alt: 'Vue drone sur le récif de corail', span: 'normal' },
+  { src: '/images/jenna-5.jpg',  alt: 'Deux bateaux côte à côte, eau turquoise', span: 'wide' },
+  { src: '/images/jenna-11.jpg', alt: 'Poussin sterne blanche sur l\'île', span: 'normal' },
+  { src: '/images/jenna-12.jpg', alt: 'Vue top-down du bateau dans le lagon cristallin', span: 'normal' },
+];
+
+// ─── Gallery Videos ───────────────────────────────────────────────────────────
+export const GALLERY_VIDEOS: GalleryVideo[] = [
+  { src: '/videos/jenna-v1.mp4', label: 'Ambiance à bord' },
+  { src: '/videos/jenna-v2.mp4', label: 'Navigation dans le lagon' },
+  { src: '/videos/jenna-v3.mp4', label: 'Arrivée sur l\'île' },
+  { src: '/videos/jenna-v4.mp4', label: 'Déjeuner & bonne humeur' },
+  { src: '/videos/jenna-v5.mp4', label: 'Départ de Cap Malheureux' },
 ];

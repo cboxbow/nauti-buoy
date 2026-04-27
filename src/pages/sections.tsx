@@ -189,7 +189,10 @@ function PhotoGrid({ images, onOpen }: { images: GalleryImage[]; onOpen: (i: num
     <div className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[220px]">
       {images.map((img, idx) => (
         <motion.div
-          key={idx} variants={fadeUp}
+          key={img.src}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
           onClick={() => onOpen(idx)}
           className={`relative overflow-hidden rounded-2xl cursor-pointer group ${img.span === 'wide' ? 'col-span-2' : ''}`}
         >

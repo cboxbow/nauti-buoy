@@ -1,0 +1,222 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+==========================================================================
+【AI HANDOVER NOTE】
+1. DESIGN PHILOSOPHY:
+   - Tropical Luxury Minimalism: Inspired by Airbnb Luxe and Four Seasons, this design system creates an ultra-premium yet approachable tropical experience. The philosophy centers on 'Emotional Immediacy' — every visual element must trigger the visceral desire to book immediately.
+   - Visual Style: Cinematic fullscreen sections with warm golden overlays, glassmorphism cards floating over turquoise gradients, and subtle parallax effects. We employ 'Atmospheric Depth' through layered transparency and ambient lighting that mimics the crystal-clear lagoon waters of Mauritius.
+   - Why This Style: Landing pages for experiential travel require emotional resonance over information density. The Bento-style modular cards allow quick scanning of experiences while maintaining premium aesthetics. The turquoise-to-deep-ocean gradient creates subconscious association with the actual lagoon journey.
+
+2. TYPOGRAPHY:
+   - Display Font (Playfair Display): Chosen for its elegant serifs that convey luxury and timelessness, perfect for hero headlines like 'Discover Mauritius Like Never Before'. The high contrast strokes create visual drama in large sizes while maintaining readability.
+   - UI Font (Inter): Modern geometric sans-serif with excellent legibility across all devices. Its neutral character ensures content clarity without competing with the emotional imagery. Variable font weights (300-700) provide typographic hierarchy for CTAs, body text, and micro-copy.
+   - Mono Font (JetBrains Mono): Used sparingly for pricing tables, time schedules (09:00-17:00 timeline), and booking reference numbers, adding technical precision to an otherwise emotional design.
+
+3. COLOR SYSTEM:
+   - Brand Primary (Turquoise #00CFC8 → oklch(0.78 0.14 195)): Directly sampled from Mauritius lagoon waters. This cyan-turquoise hue (195° in OKLCH) creates instant tropical association. Mapped to --primary for CTAs and --accent for interactive elements.
+   - Deep Ocean Blue (#0A2540 → oklch(0.22 0.08 240)): Anchors the design with nautical authority. Used for --foreground in dark mode and --sidebar colors, creating depth contrast against turquoise.
+   - Sunset Gold (#F4A941 → oklch(0.75 0.13 65)): Warm accent for hover states, premium badges, and emotional CTA sections. Mapped to --chart-1 for visual consistency.
+   - Semantic Colors: --success uses tropical green (155°) for 'Available' booking slots; --warning uses coral orange (45°) for 'Limited Spots'; --destructive remains red (15°) for cancellation policies.
+   - The --ring color uses turquoise with reduced chroma for focus states, maintaining brand consistency in interactive elements.
+
+4. USAGE GUIDE:
+   - Layout: Full-width hero with 100vh, followed by centered 1280px container for content sections. Use Bento grid (CSS Grid with auto-fit) for Experience Cards and Gallery.
+   - Glassmorphism Application: Apply backdrop-blur-xl + bg-card/80 to floating booking buttons and testimonial cards overlaying imagery. Ensure WCAG AA contrast by using --card-foreground with sufficient opacity.
+   - Rim-Light Effect: Add subtle inset box-shadow (0 1px 0 oklch(1 0 0 / 0.1)) to card tops, simulating sunlight reflection on water surfaces.
+   - Animations: Use scroll-triggered fade-in for sections (Intersection Observer), parallax on hero (transform: translateY), and smooth hover scale (1.02) on CTA buttons.
+   - WhatsApp Integration: Floating button (fixed bottom-right) uses --primary with pulse animation. Sticky booking bar on mobile uses --sidebar with elevated shadow.
+   - Mobile-First: All spacing uses rem units. Hero text scales from 2.5rem (mobile) to 4rem (desktop). Gallery switches from 1-column to 3-column masonry at 768px breakpoint.
+   - SEO Colors: Ensure --background to --foreground contrast exceeds 12:1 for body text, 7:1 for large text (hero headlines).
+==========================================================================
+*/
+
+:root {
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --font-heading: 'Playfair Display', Georgia, serif;
+
+  /* Brand Custom */
+  --ocean-deep: oklch(0.22 0.08 240);
+  --gold: oklch(0.75 0.13 65);
+  --lagoon: oklch(0.78 0.14 195);
+  
+  /* Radius */
+  --radius: 0.75rem;
+
+  /* Core UI Tokens */
+  --background: oklch(0.99 0.01 200);
+  --foreground: oklch(0.18 0.02 240);
+  --card: oklch(0.98 0.01 200);
+  --card-foreground: oklch(0.20 0.02 240);
+  --popover: oklch(0.99 0.01 200);
+  --popover-foreground: oklch(0.18 0.02 240);
+  --primary: oklch(0.78 0.14 195);
+  --primary-foreground: oklch(0.99 0.01 200);
+  --secondary: oklch(0.94 0.02 200);
+  --secondary-foreground: oklch(0.22 0.02 240);
+  --muted: oklch(0.96 0.01 200);
+  --muted-foreground: oklch(0.48 0.02 240);
+  --accent: oklch(0.75 0.13 65);
+  --accent-foreground: oklch(0.99 0.01 200);
+  --destructive: oklch(0.62 0.22 15);
+  --destructive-foreground: oklch(0.99 0.01 200);
+  --border: oklch(0.90 0.02 200);
+  --input: oklch(0.88 0.02 200);
+  --ring: oklch(0.78 0.10 195);
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.75 0.13 65);
+  --chart-2: oklch(0.78 0.14 195);
+  --chart-3: oklch(0.22 0.08 240);
+  --chart-4: oklch(0.68 0.18 155);
+  --chart-5: oklch(0.70 0.12 280);
+  
+  /* Sidebar Tokens */
+  --sidebar: oklch(0.97 0.01 200);
+  --sidebar-foreground: oklch(0.22 0.02 240);
+  --sidebar-primary: oklch(0.78 0.14 195);
+  --sidebar-primary-foreground: oklch(0.99 0.01 200);
+  --sidebar-accent: oklch(0.75 0.13 65);
+  --sidebar-accent-foreground: oklch(0.99 0.01 200);
+  --sidebar-border: oklch(0.92 0.02 200);
+  --sidebar-ring: oklch(0.78 0.10 195);
+}
+
+.dark {
+  --background: oklch(0.15 0.02 240);
+  --foreground: oklch(0.95 0.01 200);
+  --card: oklch(0.18 0.02 240);
+  --card-foreground: oklch(0.95 0.01 200);
+  --popover: oklch(0.16 0.02 240);
+  --popover-foreground: oklch(0.95 0.01 200);
+  --primary: oklch(0.80 0.16 195);
+  --primary-foreground: oklch(0.15 0.02 240);
+  --secondary: oklch(0.25 0.03 240);
+  --secondary-foreground: oklch(0.95 0.01 200);
+  --muted: oklch(0.22 0.02 240);
+  --muted-foreground: oklch(0.65 0.02 200);
+  --accent: oklch(0.78 0.15 65);
+  --accent-foreground: oklch(0.15 0.02 240);
+  --destructive: oklch(0.65 0.24 15);
+  --destructive-foreground: oklch(0.95 0.01 200);
+  --border: oklch(0.28 0.03 240);
+  --input: oklch(0.30 0.03 240);
+  --ring: oklch(0.80 0.12 195);
+  
+  /* Chart Tokens */
+  --chart-1: oklch(0.78 0.15 65);
+  --chart-2: oklch(0.80 0.16 195);
+  --chart-3: oklch(0.55 0.12 240);
+  --chart-4: oklch(0.70 0.20 155);
+  --chart-5: oklch(0.72 0.14 280);
+  
+  /* Sidebar Tokens */
+  --sidebar: oklch(0.17 0.02 240);
+  --sidebar-foreground: oklch(0.92 0.01 200);
+  --sidebar-primary: oklch(0.80 0.16 195);
+  --sidebar-primary-foreground: oklch(0.15 0.02 240);
+  --sidebar-accent: oklch(0.78 0.15 65);
+  --sidebar-accent-foreground: oklch(0.15 0.02 240);
+  --sidebar-border: oklch(0.26 0.03 240);
+  --sidebar-ring: oklch(0.80 0.12 195);
+}
+
+@theme inline {
+  /* Shadcn Core Mapping */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Charts Mapping */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar Mapping */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Typography */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-heading);
+
+  /* Brand Custom Colors */
+  --color-ocean-deep: var(--ocean-deep);
+  --color-gold: var(--gold);
+  --color-lagoon: var(--lagoon);
+
+  /* Radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans min-h-screen;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  code, pre {
+    @apply font-mono;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-primary;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40;
+  }
+}

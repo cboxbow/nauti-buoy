@@ -303,9 +303,9 @@ export const GALLERY_AMBIANCE: GalleryImage[] = [
 
 // ─── Gallery Videos ───────────────────────────────────────────────────────────
 export const GALLERY_VIDEOS: GalleryVideo[] = [
-  { src: '/videos/jenna-v1.mp4', label: 'Ambiance à bord' },
-  { src: '/videos/jenna-v2.mp4', label: 'Navigation dans le lagon' },
-  { src: '/videos/jenna-v3.mp4', label: 'Arrivée sur l\'île' },
-  { src: '/videos/jenna-v4.mp4', label: 'Déjeuner & bonne humeur' },
-  { src: '/videos/jenna-v5.mp4', label: 'Départ de Cap Malheureux' },
+  { src: '/videos/jenna-v1.mp4', label: 'Ambiance Île Plate' },
+  { src: '/videos/jenna-v2.mp4', label: 'Plaisir de plongée' },
+  { src: '/videos/jenna-v3.mp4', label: 'Snorkeling' },
+  { src: '/videos/jenna-v4.mp4', label: 'Seul au monde' },
+  { src: '/videos/jenna-v5.mp4', label: 'Le paradis commence ici' },
 ];

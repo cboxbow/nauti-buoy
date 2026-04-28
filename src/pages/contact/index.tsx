@@ -1,12 +1,15 @@
 import { PageBanner, ContactSection } from '@/pages/sections';
+import { useLang } from '@/context/LanguageContext';
+import { T } from '@/lib/translations';
 
 export default function Contact() {
+  const { lang } = useLang();
   return (
     <div>
       <PageBanner
-        tag="Contact"
-        title="Planifions Votre Escapade"
-        subtitle="Répondons en quelques minutes sur WhatsApp. Départ depuis Cap Malheureux à 8h30."
+        tag={T.banners.contact.tag[lang]}
+        title={T.banners.contact.title[lang]}
+        subtitle={T.banners.contact.sub[lang]}
         image="/images/nb-3.jpg"
       />
       <ContactSection />

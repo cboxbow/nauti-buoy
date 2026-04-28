@@ -3,14 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { WHATSAPP_URL } from '@/lib/index';
+import { useLang } from '@/context/LanguageContext';
+import { T } from '@/lib/translations';
 
-const NAV_LINKS = [
-  { label: 'Excursions', path: '/excursions' },
-  { label: 'Galerie', path: '/galerie' },
-  { label: 'Programme', path: '/programme' },
-  { label: 'Tarifs', path: '/tarifs' },
-  { label: 'Contact', path: '/contact' },
-];
+const NAV_PATHS = [
+  { key: 'excursions', path: '/excursions' },
+  { key: 'galerie',    path: '/galerie'    },
+  { key: 'programme',  path: '/programme'  },
+  { key: 'tarifs',     path: '/tarifs'     },
+  { key: 'contact',    path: '/contact'    },
+] as const;
 
 const WA_SVG = (
   <svg className="w-5 h-5 fill-white" viewBox="0 0 24 24">
@@ -19,11 +21,12 @@ const WA_SVG = (
 );
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const isHome = location.pathname === '/';
+  const [scrolled, setScrolled]   = useState(false);
+  const [menuOpen, setMenuOpen]   = useState(false);
+  const navigate   = useNavigate();
+  const location   = useLocation();
+  const isHome     = location.pathname === '/';
+  const { lang, setLang } = useLang();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -31,10 +34,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => { setMenuOpen(false); }, [location.pathname]);
 
-  // On inner pages, always show the solid nav
   const solidNav = scrolled || !isHome;
 
   return (
@@ -48,7 +49,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
           solidNav ? 'bg-white/96 backdrop-blur-md shadow-lg py-2' : 'bg-transparent py-4'
         }`}
       >
-        {/* 3-column grid: logo | nav centré | book now */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-[auto_1fr_auto] items-center gap-4">
 
           {/* ── COL 1 : LOGO ── */}
@@ -56,8 +56,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <div
               className="relative overflow-hidden rounded-full flex-shrink-0 group-hover:scale-105 transition-transform duration-300"
               style={{
-                width: solidNav ? 42 : 50,
-                height: solidNav ? 42 : 50,
+                width: solidNav ? 42 : 50, height: solidNav ? 42 : 50,
                 transition: 'width 0.4s, height 0.4s',
                 boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
                 border: '2px solid rgba(244,169,65,0.8)',
@@ -77,19 +76,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
           {/* ── COL 2 : NAV LINKS (desktop, centré) ── */}
           <nav className="hidden md:flex items-center justify-center gap-7">
-            {NAV_LINKS.map((link) => {
+            {NAV_PATHS.map((link) => {
               const active = location.pathname === link.path;
+              const label  = T.nav[link.key][lang];
               return (
                 <button
                   key={link.path}
                   onClick={() => navigate(link.path)}
                   className={`text-sm font-medium tracking-wide transition-colors relative ${
                     active
-                      ? solidNav ? 'text-primary' : 'text-primary'
+                      ? 'text-primary'
                       : solidNav ? 'text-foreground/80 hover:text-primary' : 'text-white/90 hover:text-primary'
                   }`}
                 >
-                  {link.label}
+                  {label}
                   {active && (
                     <motion.span
                       layoutId="nav-underline"
@@ -101,8 +101,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
             })}
           </nav>
 
-          {/* ── COL 3 : BOOK NOW + HAMBURGER ── */}
+          {/* ── COL 3 : LANG TOGGLE + BOOK NOW + HAMBURGER ── */}
           <div className="flex items-center justify-end gap-3">
+
+            {/* Language switcher */}
+            <div className={`hidden md:flex items-center gap-1 text-sm font-semibold rounded-full px-2 py-1 transition-colors ${solidNav ? 'bg-muted/60' : 'bg-white/10'}`}>
+              <button
+                onClick={() => setLang('fr')}
+                className={`px-2 py-0.5 rounded-full transition-all duration-200 ${lang === 'fr' ? 'bg-primary text-white' : solidNav ? 'text-foreground/50 hover:text-primary' : 'text-white/50 hover:text-white'}`}
+              >
+                FR
+              </button>
+              <button
+                onClick={() => setLang('en')}
+                className={`px-2 py-0.5 rounded-full transition-all duration-200 ${lang === 'en' ? 'bg-primary text-white' : solidNav ? 'text-foreground/50 hover:text-primary' : 'text-white/50 hover:text-white'}`}
+              >
+                EN
+              </button>
+            </div>
+
             <a
               href={WHATSAPP_URL}
               target="_blank"
@@ -111,8 +128,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
               style={{ boxShadow: '0 4px 20px oklch(0.78 0.14 195 / 0.4)' }}
             >
               {WA_SVG}
-              Réserver
+              {T.nav.book[lang]}
             </a>
+
             <button
               className="md:hidden p-2 rounded-lg"
               onClick={() => setMenuOpen((o) => !o)}
@@ -137,7 +155,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
               className="md:hidden bg-white border-t border-border overflow-hidden"
             >
               <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-3">
-                {NAV_LINKS.map((link) => (
+
+                {/* Mobile lang toggle */}
+                <div className="flex items-center gap-2 pb-3 border-b border-border/50">
+                  <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Language</span>
+                  <div className="flex items-center gap-1 ml-auto bg-muted/60 rounded-full px-1 py-0.5">
+                    <button onClick={() => setLang('fr')} className={`px-3 py-1 rounded-full text-sm font-semibold transition-all ${lang === 'fr' ? 'bg-primary text-white' : 'text-foreground/50'}`}>FR</button>
+                    <button onClick={() => setLang('en')} className={`px-3 py-1 rounded-full text-sm font-semibold transition-all ${lang === 'en' ? 'bg-primary text-white' : 'text-foreground/50'}`}>EN</button>
+                  </div>
+                </div>
+
+                {NAV_PATHS.map((link) => (
                   <button
                     key={link.path}
                     onClick={() => navigate(link.path)}
@@ -145,7 +173,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                       location.pathname === link.path ? 'text-primary' : 'text-foreground/80 hover:text-primary'
                     }`}
                   >
-                    {link.label}
+                    {T.nav[link.key][lang]}
                   </button>
                 ))}
                 <a
@@ -156,7 +184,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   style={{ background: '#25D366' }}
                 >
                   {WA_SVG}
-                  Réserver via WhatsApp
+                  {T.nav.bookWA[lang]}
                 </a>
               </div>
             </motion.div>
@@ -177,15 +205,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </div>
               <div>
                 <p className="font-heading font-bold text-xl text-white">Nauti Buoy</p>
-                <p className="text-white/50 text-sm mt-0.5">Nord Mauritius · Excursions en mer</p>
-                <p className="text-white/40 text-xs mt-0.5">Départ : Cap Malheureux · 8h30</p>
+                <p className="text-white/50 text-sm mt-0.5">{T.footer.tagline[lang]}</p>
+                <p className="text-white/40 text-xs mt-0.5">{T.footer.depart[lang]}</p>
               </div>
             </div>
 
             <nav className="flex flex-wrap justify-center gap-5">
-              {NAV_LINKS.map((link) => (
+              {NAV_PATHS.map((link) => (
                 <button key={link.path} onClick={() => navigate(link.path)} className="text-sm text-white/50 hover:text-white transition-colors">
-                  {link.label}
+                  {T.nav[link.key][lang]}
                 </button>
               ))}
             </nav>
@@ -199,7 +227,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 {WA_SVG}
                 Chat WhatsApp
               </a>
-              <p className="text-white/30 text-xs">© 2026 Nauti Buoy Mauritius. All rights reserved.</p>
+              <p className="text-white/30 text-xs">{T.footer.rights[lang]}</p>
             </div>
           </div>
         </div>
@@ -226,10 +254,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <img src="/images/nauti-buoy-logo.jpg" alt="Nauti Buoy" className="w-9 h-9 rounded-full object-cover flex-shrink-0" style={{ border: '1.5px solid rgba(244,169,65,0.6)' }} />
           <div className="flex-1 min-w-0">
             <p className="text-xs text-muted-foreground">Nauti Buoy · Île Maurice</p>
-            <p className="text-sm font-bold text-foreground">À partir de Rs 2 200 / pers.</p>
+            <p className="text-sm font-bold text-foreground">{T.footer.from[lang]}</p>
           </div>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold text-white whitespace-nowrap" style={{ background: 'linear-gradient(135deg, oklch(0.78 0.14 195), oklch(0.65 0.12 195))' }}>
-            Réserver
+            {T.nav.book[lang]}
           </a>
         </div>
       </div>

@@ -1,12 +1,15 @@
 import { PageBanner, ExperiencesSection, WhyUsSection, CTASection } from '@/pages/sections';
+import { useLang } from '@/context/LanguageContext';
+import { T } from '@/lib/translations';
 
 export default function Excursions() {
+  const { lang } = useLang();
   return (
     <div>
       <PageBanner
-        tag="Nos Excursions"
-        title="Choisissez Votre Aventure"
-        subtitle="Flat Island, Gabriel Island & Coin de Mire — chaque sortie est une expérience unique dans le lagon du Nord."
+        tag={T.banners.excursions.tag[lang]}
+        title={T.banners.excursions.title[lang]}
+        subtitle={T.banners.excursions.sub[lang]}
         image="/images/nb-4.jpg"
       />
       <ExperiencesSection />

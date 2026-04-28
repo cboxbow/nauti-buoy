@@ -1,12 +1,15 @@
 import { PageBanner, TimelineSection, CTASection } from '@/pages/sections';
+import { useLang } from '@/context/LanguageContext';
+import { T } from '@/lib/translations';
 
 export default function Programme() {
+  const { lang } = useLang();
   return (
     <div>
       <PageBanner
-        tag="Programme de la journée"
-        title="Une Journée au Paradis"
-        subtitle="Départ 08h30 · Retour 15h30 — depuis la plage de l'église de Cap Malheureux. Voici comment se déroule votre journée parfaite."
+        tag={T.banners.programme.tag[lang]}
+        title={T.banners.programme.title[lang]}
+        subtitle={T.banners.programme.sub[lang]}
         image="/images/nb-8.jpg"
       />
       <TimelineSection />

@@ -11,6 +11,9 @@ import {
   TESTIMONIALS, PRICING_PLANS, GALLERY_IMAGES, GALLERY_AMBIANCE, GALLERY_VIDEOS,
   type GalleryImage,
 } from '@/lib/index';
+import { TOURS_EN, FEATURES_EN, TIMELINE_EN, PRICING_PLANS_EN } from '@/lib/data-en';
+import { useLang } from '@/context/LanguageContext';
+import { T } from '@/lib/translations';
 
 // ─── Animation Variants ───────────────────────────────────────────────────────
 export const fadeUp = {
@@ -79,18 +82,20 @@ export function PageBanner({
 
 // ─── EXPERIENCES ──────────────────────────────────────────────────────────────
 export function ExperiencesSection() {
+  const { lang } = useLang();
+  const tours = lang === 'fr' ? TOURS : TOURS_EN;
   return (
     <Section id="experiences" className="py-24 px-4 bg-background">
       <div className="max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="text-center mb-16">
-          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">Nos Excursions</p>
-          <h2 className="font-heading text-4xl md:text-5xl text-foreground mb-4">Choisissez Votre Aventure</h2>
+          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">{T.experiences.tag[lang]}</p>
+          <h2 className="font-heading text-4xl md:text-5xl text-foreground mb-4">{T.experiences.title[lang]}</h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Chaque sortie est conçue pour créer des souvenirs inoubliables.
+            {T.experiences.subtitle[lang]}
           </p>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {TOURS.map((tour, idx) => (
+          {tours.map((tour, idx) => (
             <motion.div
               key={tour.id} variants={fadeUp}
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
@@ -120,7 +125,7 @@ export function ExperiencesSection() {
                 {/* Itinerary stops (optional) */}
                 {tour.itinerary && (
                   <div className="space-y-3 mb-4">
-                    <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/60">Programme</p>
+                    <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/60">{T.experiences.itinerary[lang]}</p>
                     {tour.itinerary.map((stop, si) => (
                       <div key={si} className="flex gap-3">
                         <div
@@ -153,7 +158,7 @@ export function ExperiencesSection() {
                   className="mt-auto w-full text-center py-3 rounded-full font-semibold text-sm transition-all duration-200 hover:scale-105 bg-primary text-primary-foreground"
                   style={{ boxShadow: '0 4px 16px oklch(0.78 0.14 195 / 0.35)' }}
                 >
-                  Réserver ce voyage
+                  {T.experiences.cta[lang]}
                 </a>
               </div>
             </motion.div>
@@ -166,6 +171,8 @@ export function ExperiencesSection() {
 
 // ─── WHY US ───────────────────────────────────────────────────────────────────
 export function WhyUsSection() {
+  const { lang } = useLang();
+  const features = lang === 'fr' ? FEATURES : FEATURES_EN;
   return (
     <Section
       id="why-us" className="py-24 px-4 relative overflow-hidden"
@@ -178,14 +185,14 @@ export function WhyUsSection() {
       </div>
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div variants={fadeUp} className="text-center mb-16">
-          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">Pourquoi Nous</p>
-          <h2 className="font-heading text-4xl md:text-5xl text-white mb-4">Ce Qui Nous Distingue</h2>
+          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">{T.whyUs.tag[lang]}</p>
+          <h2 className="font-heading text-4xl md:text-5xl text-white mb-4">{T.whyUs.title[lang]}</h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Pas juste une sortie en bateau. Une expérience façonnée avec passion et authenticité mauricienne.
+            {T.whyUs.subtitle[lang]}
           </p>
         </motion.div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {FEATURES.map((feature) => (
+          {features.map((feature) => (
             <motion.div
               key={feature.title} variants={fadeUp} whileHover={{ scale: 1.03 }}
               className="group p-6 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300"
@@ -231,6 +238,7 @@ function PhotoGrid({ images, onOpen }: { images: GalleryImage[]; onOpen: (i: num
 }
 
 export function GallerySection() {
+  const { lang } = useLang();
   const [tab, setTab] = useState<'drone' | 'ambiance' | 'videos'>('drone');
   const [lightboxPool, setLightboxPool] = useState<GalleryImage[]>([]);
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
@@ -254,19 +262,19 @@ export function GallerySection() {
   }, [lightboxPool]);
 
   const tabs = [
-    { key: 'drone',    label: '🚁 Vue du ciel' },
-    { key: 'ambiance', label: '🍹 Ambiance & Repas' },
-    { key: 'videos',   label: '🎬 Vidéos' },
+    { key: 'drone',    label: T.gallery.tabDrone[lang] },
+    { key: 'ambiance', label: T.gallery.tabAmbiance[lang] },
+    { key: 'videos',   label: T.gallery.tabVideos[lang] },
   ] as const;
 
   return (
     <Section id="gallery" className="py-24 px-4 bg-muted/30">
       <div className="max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="text-center mb-10">
-          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">Galerie</p>
-          <h2 className="font-heading text-4xl md:text-5xl text-foreground mb-4">Vivez la Magie</h2>
+          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">{T.gallery.tag[lang]}</p>
+          <h2 className="font-heading text-4xl md:text-5xl text-foreground mb-4">{T.gallery.title[lang]}</h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Les photos ne font qu'effleurer la réalité. Mais elles vous feront ressentir quelque chose.
+            {T.gallery.subtitle[lang]}
           </p>
         </motion.div>
 
@@ -363,20 +371,22 @@ export function GallerySection() {
 
 // ─── TIMELINE ─────────────────────────────────────────────────────────────────
 export function TimelineSection() {
+  const { lang } = useLang();
+  const timeline = lang === 'fr' ? TIMELINE : TIMELINE_EN;
   return (
     <Section id="timeline" className="py-24 px-4 bg-background">
       <div className="max-w-4xl mx-auto">
         <motion.div variants={fadeUp} className="text-center mb-16">
-          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">Votre Journée</p>
-          <h2 className="font-heading text-4xl md:text-5xl text-foreground mb-4">Une Journée au Paradis</h2>
+          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">{T.timeline.tag[lang]}</p>
+          <h2 className="font-heading text-4xl md:text-5xl text-foreground mb-4">{T.timeline.title[lang]}</h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Du moment où vous montez à bord jusqu'au retour sous la lumière dorée.
+            {T.timeline.subtitle[lang]}
           </p>
         </motion.div>
         <div className="relative">
           <div className="absolute left-[2.2rem] md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-primary/40 to-transparent" />
           <div className="space-y-8">
-            {TIMELINE.map((item, idx) => (
+            {timeline.map((item, idx) => (
               <motion.div
                 key={item.time} variants={fadeUp}
                 className={`flex gap-6 md:gap-0 items-start relative ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
@@ -412,6 +422,7 @@ export function TimelineSection() {
 
 // ─── TESTIMONIALS ─────────────────────────────────────────────────────────────
 export function TestimonialsSection() {
+  const { lang } = useLang();
   const [current, setCurrent] = useState(0);
   const total = TESTIMONIALS.length;
 
@@ -422,12 +433,12 @@ export function TestimonialsSection() {
     >
       <div className="max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="text-center mb-14">
-          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">Avis Clients</p>
-          <h2 className="font-heading text-4xl md:text-5xl text-foreground mb-4">Ce Que Disent Nos Clients</h2>
+          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">{T.testimonials.tag[lang]}</p>
+          <h2 className="font-heading text-4xl md:text-5xl text-foreground mb-4">{T.testimonials.title[lang]}</h2>
           <div className="flex items-center justify-center gap-1 mb-2">
             {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-gold fill-gold" />)}
             <span className="ml-2 font-semibold text-foreground">5.0</span>
-            <span className="text-muted-foreground ml-1">· 200+ avis sur Google &amp; TripAdvisor</span>
+            <span className="text-muted-foreground ml-1">· {T.testimonials.count[lang]}</span>
           </div>
         </motion.div>
 
@@ -480,19 +491,21 @@ export function TestimonialsSection() {
 
 // ─── PRICING ──────────────────────────────────────────────────────────────────
 export function PricingSection() {
+  const { lang } = useLang();
+  const plans = lang === 'fr' ? PRICING_PLANS : PRICING_PLANS_EN;
   return (
     <Section id="pricing" className="py-24 px-4 bg-background">
       <div className="max-w-5xl mx-auto">
         <motion.div variants={fadeUp} className="text-center mb-14">
-          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">Tarifs</p>
-          <h2 className="font-heading text-4xl md:text-5xl text-foreground mb-4">Prix Clairs &amp; Transparents</h2>
+          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">{T.pricing.tag[lang]}</p>
+          <h2 className="font-heading text-4xl md:text-5xl text-foreground mb-4">{T.pricing.title[lang]}</h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Aucun frais caché. Aucune surprise. Juste une journée incroyable sur l'eau.
+            {T.pricing.subtitle[lang]}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-          {PRICING_PLANS.map((plan) => (
+          {plans.map((plan) => (
             <motion.div
               key={plan.name} variants={fadeUp} whileHover={{ y: -6, transition: { duration: 0.3 } }}
               className={`relative rounded-3xl p-8 flex flex-col transition-all duration-300 ${plan.highlighted ? 'text-white shadow-2xl' : 'bg-card border border-border hover:border-primary/30 hover:shadow-xl'}`}
@@ -561,14 +574,14 @@ export function PricingSection() {
                 className={`w-full text-center py-4 rounded-full font-semibold text-base transition-all duration-200 hover:scale-105 ${plan.highlighted ? 'bg-primary text-primary-foreground' : 'border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground'}`}
                 style={plan.highlighted ? { boxShadow: '0 6px 20px oklch(0.78 0.14 195 / 0.4)' } : {}}
               >
-                Réserver via WhatsApp
+                {T.pricing.cta[lang]}
               </a>
             </motion.div>
           ))}
         </div>
 
         <motion.p variants={fadeUp} className="text-center text-muted-foreground text-sm mt-8">
-          Paiement sur place — espèces ou carte acceptés. Départ : 08h30 · Retour : 15h30.
+          {T.pricing.footer[lang]}
         </motion.p>
       </div>
     </Section>
@@ -577,6 +590,7 @@ export function PricingSection() {
 
 // ─── CTA ──────────────────────────────────────────────────────────────────────
 export function CTASection() {
+  const { lang } = useLang();
   const navigate = useNavigate();
   return (
     <section className="relative py-32 px-4 overflow-hidden" style={{ background: 'linear-gradient(160deg, oklch(0.22 0.08 240) 0%, oklch(0.28 0.06 200) 100%)' }}>
@@ -590,21 +604,20 @@ export function CTASection() {
           <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-6" style={{ border: '3px solid rgba(244,169,65,0.7)', boxShadow: '0 8px 32px rgba(0,0,0,0.4)' }}>
             <img src="/images/nauti-buoy-logo.jpg" alt="Nauti Buoy" className="w-full h-full object-cover" />
           </div>
-          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-4">Nauti Buoy · Île Maurice 🇲🇺</p>
+          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-4">{T.cta.tag[lang]}</p>
           <h2 className="font-heading text-white leading-tight mb-6" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)' }}>
-            Prêt à vivre<br /><span style={{ color: '#00CFC8' }}>le paradis ?</span>
+            {T.cta.title1[lang]}<br /><span style={{ color: '#00CFC8' }}>{T.cta.title2[lang]}</span>
           </h2>
-          <p className="text-white/70 text-lg mb-10 leading-relaxed">
-            Le lagon vous attend. Réservez en quelques minutes.<br />
-            Paiement sur place. Souvenirs pour la vie.
+          <p className="text-white/70 text-lg mb-10 leading-relaxed whitespace-pre-line">
+            {T.cta.subtitle[lang]}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-8 py-4 rounded-full font-bold text-base text-white transition-all duration-300 hover:scale-105" style={{ background: '#25D366', boxShadow: '0 8px 30px rgba(37, 211, 102, 0.4)' }}>
               <svg className="w-5 h-5 fill-white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.488" /></svg>
-              Réserver via WhatsApp
+              {T.cta.cta1[lang]}
             </a>
             <button onClick={() => navigate('/tarifs')} className="px-8 py-4 rounded-full font-semibold text-base border-2 border-white/30 text-white hover:border-primary hover:bg-primary/10 transition-all duration-300">
-              Voir les tarifs
+              {T.cta.cta2[lang]}
             </button>
           </div>
         </motion.div>
@@ -615,13 +628,14 @@ export function CTASection() {
 
 // ─── CONTACT ──────────────────────────────────────────────────────────────────
 export function ContactSection() {
+  const { lang } = useLang();
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', guests: '', message: '', date: '' });
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const msg = encodeURIComponent(
-      `Bonjour Nauti Buoy! 🌊 Je souhaite réserver une excursion.\n\nNom : ${formData.name}\nEmail : ${formData.email}\nTél : ${formData.phone}\nNombre de personnes : ${formData.guests}\nDate souhaitée : ${formData.date}\nMessage : ${formData.message}`
+      T.contact.waMsg[lang]({ name: formData.name, email: formData.email, phone: formData.phone, guests: formData.guests, date: formData.date, message: formData.message })
     );
     window.open(`https://wa.me/23057701684?text=${msg}`, '_blank');
     setSubmitted(true);
@@ -631,10 +645,10 @@ export function ContactSection() {
     <Section id="contact" className="py-24 px-4 bg-muted/20">
       <div className="max-w-7xl mx-auto">
         <motion.div variants={fadeUp} className="text-center mb-14">
-          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">Contact</p>
-          <h2 className="font-heading text-4xl md:text-5xl text-foreground mb-4">Planifions Votre Escapade</h2>
+          <p className="text-primary font-semibold tracking-widest uppercase text-sm mb-3">{T.contact.tag[lang]}</p>
+          <h2 className="font-heading text-4xl md:text-5xl text-foreground mb-4">{T.contact.title[lang]}</h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Une question ? Une réservation ? On vous répond en quelques minutes sur WhatsApp.
+            {T.contact.subtitle[lang]}
           </p>
         </motion.div>
 
@@ -649,9 +663,9 @@ export function ContactSection() {
             </div>
             <div className="space-y-4">
               {[
-                { icon: Phone, label: 'Appel ou WhatsApp', value: '+230 5770 1684', href: 'tel:+23057701684' },
-                { icon: MapPin, label: 'Point de départ', value: 'Église de Cap Malheureux, Nord Mauritius', href: 'https://maps.google.com/?q=Cap+Malheureux+Church,+Mauritius' },
-                { icon: Clock, label: 'Départs', value: 'Tous les jours à 8h30 (selon météo)', href: undefined },
+                { icon: Phone, label: T.contact.phoneLabel[lang], value: '+230 5770 1684', href: 'tel:+23057701684' },
+                { icon: MapPin, label: T.contact.locLabel[lang], value: T.contact.locValue[lang], href: 'https://maps.google.com/?q=Cap+Malheureux+Church,+Mauritius' },
+                { icon: Clock, label: T.contact.hoursLabel[lang], value: T.contact.hoursValue[lang], href: undefined },
               ].map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex items-start gap-4 p-4 rounded-xl bg-card border border-border">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -676,47 +690,47 @@ export function ContactSection() {
                 <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6">
                   <Check className="w-8 h-8 text-primary" />
                 </div>
-                <h3 className="font-heading text-2xl text-foreground mb-3">Message envoyé !</h3>
-                <p className="text-muted-foreground max-w-xs">WhatsApp s'ouvre avec vos informations. On confirme très rapidement ! 🌊</p>
+                <h3 className="font-heading text-2xl text-foreground mb-3">{T.contact.successTitle[lang]}</h3>
+                <p className="text-muted-foreground max-w-xs">{T.contact.successSub[lang]}</p>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="bg-card rounded-3xl border border-border p-8 space-y-5 shadow-sm">
-                <h3 className="font-heading text-2xl text-foreground mb-2">Réserver votre excursion</h3>
-                <p className="text-muted-foreground text-sm mb-4">Remplissez le formulaire — on confirme via WhatsApp.</p>
+                <h3 className="font-heading text-2xl text-foreground mb-2">{T.contact.formTitle[lang]}</h3>
+                <p className="text-muted-foreground text-sm mb-4">{T.contact.formSub[lang]}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-foreground/80 mb-1.5">Votre nom</label>
-                    <input type="text" required value={formData.name} onChange={(e) => setFormData((f) => ({ ...f, name: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground transition" placeholder="Jean Dupont" />
+                    <label className="block text-sm font-medium text-foreground/80 mb-1.5">{T.contact.name[lang]}</label>
+                    <input type="text" required value={formData.name} onChange={(e) => setFormData((f) => ({ ...f, name: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground transition" placeholder={T.contact.namePh[lang]} />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground/80 mb-1.5">Tél / WhatsApp</label>
+                    <label className="block text-sm font-medium text-foreground/80 mb-1.5">{T.contact.tel[lang]}</label>
                     <input type="tel" value={formData.phone} onChange={(e) => setFormData((f) => ({ ...f, phone: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground transition" placeholder="+230 5XXX XXXX" />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-foreground/80 mb-1.5">Email</label>
+                    <label className="block text-sm font-medium text-foreground/80 mb-1.5">{T.contact.email[lang]}</label>
                     <input type="email" required value={formData.email} onChange={(e) => setFormData((f) => ({ ...f, email: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground transition" placeholder="vous@email.com" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground/80 mb-1.5">Nombre de personnes</label>
+                    <label className="block text-sm font-medium text-foreground/80 mb-1.5">{T.contact.guests[lang]}</label>
                     <select required value={formData.guests} onChange={(e) => setFormData((f) => ({ ...f, guests: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring transition">
-                      <option value="">Sélectionner...</option>
-                      {[...Array(14)].map((_, i) => <option key={i + 1} value={i + 1}>{i + 1} personne{i > 0 ? 's' : ''}</option>)}
+                      <option value="">{T.contact.guestsPh[lang]}</option>
+                      {[...Array(14)].map((_, i) => <option key={i + 1} value={i + 1}>{T.contact.guestUnit[lang](i + 1)}</option>)}
                     </select>
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-foreground/80 mb-1.5">Date souhaitée</label>
+                  <label className="block text-sm font-medium text-foreground/80 mb-1.5">{T.contact.date[lang]}</label>
                   <input type="date" value={formData.date} onChange={(e) => setFormData((f) => ({ ...f, date: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring transition" min={new Date().toISOString().split('T')[0]} />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-foreground/80 mb-1.5">Message / Demandes spéciales</label>
-                  <textarea rows={3} value={formData.message} onChange={(e) => setFormData((f) => ({ ...f, message: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground transition resize-none" placeholder="Anniversaire, lune de miel, homard, privatisation..." />
+                  <label className="block text-sm font-medium text-foreground/80 mb-1.5">{T.contact.msg[lang]}</label>
+                  <textarea rows={3} value={formData.message} onChange={(e) => setFormData((f) => ({ ...f, message: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground transition resize-none" placeholder={T.contact.msgPh[lang]} />
                 </div>
                 <button type="submit" className="w-full flex items-center justify-center gap-3 py-4 rounded-full font-bold text-base text-primary-foreground transition-all duration-200 hover:scale-[1.02] hover:shadow-xl" style={{ background: 'linear-gradient(135deg, #25D366, #128C7E)', boxShadow: '0 6px 24px rgba(37, 211, 102, 0.35)' }}>
                   <Send className="w-5 h-5" />
-                  Envoyer via WhatsApp
+                  {T.contact.send[lang]}
                 </button>
               </form>
             )}

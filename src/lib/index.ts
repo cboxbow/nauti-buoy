@@ -93,51 +93,65 @@ export const TOURS: Tour[] = [
     name: 'Flat Island & Gabriel',
     tagline: 'Pristine Lagoon Escape',
     description:
-      'Trois îlots, une journée inoubliable. Snorkeling, tortues, BBQ sur la plage et eaux turquoise du lagon nord — départ 08h30 depuis l\'église de Cap Malheureux.',
+      'Trois îlots, une journée hors du commun. Snorkeling au milieu des tortues marines, déjeuner BBQ sur plage immergée et eaux cristallines du lagon nord. Départ 08h30 depuis l\'église de Cap Malheureux.',
     itinerary: [
       {
         label: '1er arrêt',
         title: 'Îlot Gabriel — Snorkeling & Tortues',
         description:
-          'Explorez les fonds marins de l\'Îlot Gabriel. Avec un peu de chance, vous nagerez avec des tortues et des raies. Leur présence est fréquente mais non garantie à 100% — ce sont des animaux sauvages dans leur milieu naturel.',
+          'Plongez dans les fonds marins préservés de l\'Îlot Gabriel, peuplés de tortues et de raies. Une rencontre rare dans leur milieu naturel.*',
       },
       {
         label: '2ème arrêt',
         title: 'Île Plate — Déjeuner & Détente',
         description:
-          'Cap sur l\'Île Plate pour un délicieux déjeuner BBQ sur la plage. Profitez du sable blanc et de la mer turquoise pour vous détendre à votre rythme.',
+          'BBQ gastronomique sur la plage de sable blanc, face au lagon turquoise. Temps libre pour se ressourcer à votre rythme.',
       },
       {
         label: '3ème arrêt',
         title: 'Coin de Mire — Snorkeling Final',
         description:
-          'Pour finir en beauté, 30 à 45 min autour du majestueux Coin de Mire — l\'endroit idéal pour le snorkeling avec une multitude de poissons tropicaux.',
+          '30 à 45 min au large du mythique Coin de Mire, sanctuaire de poissons tropicaux. Une conclusion à la hauteur du voyage.',
       },
     ],
-    duration: 'Full Day',
-    highlights: ['Îlot Gabriel · Île Plate · Coin de Mire', 'Snorkeling & nage avec les tortues*', 'BBQ complet sur la plage', 'Max 14 personnes'],
+    duration: 'Journée complète',
+    highlights: [
+      'Îlot Gabriel · Île Plate · Coin de Mire',
+      'Snorkeling & nage avec les tortues*',
+      'BBQ complet sur la plage',
+      'Bateau privé · Max 14 personnes',
+    ],
     image: '/images/nb-1.jpg',
-    badge: 'Most Popular',
   },
   {
     id: 'coin-de-mire',
     name: 'Coin de Mire Discovery',
     tagline: 'Volcanic Wonder',
     description:
-      'Explore the dramatic silhouette of Coin de Mire rising majestically from the ocean. Swim in hidden turquoise coves, spot sea turtles gliding through the reefs, and soak in the raw beauty of this iconic protected monument of North Mauritius.',
-    duration: 'Half Day',
-    highlights: ['Iconic Coin de Mire cruise', 'Sea turtle spotting', 'Hidden coves & snorkeling', 'Snorkeling gear included'],
+      'La silhouette volcanique de Coin de Mire se dresse majestueusement au-dessus de l\'océan. Nage en eaux turquoise cachées, observation de tortues marines et immersion dans la beauté brute du nord de Maurice.',
+    duration: 'Demi-journée',
+    highlights: [
+      'Croisière emblématique Coin de Mire',
+      'Observation de tortues marines',
+      'Criques cachées & snorkeling',
+      'Équipement de snorkeling fourni',
+    ],
     image: '/images/nb-7.jpg',
-    badge: 'Half Day',
+    badge: 'Populaire',
   },
   {
     id: 'full-day-ultimate',
     name: 'Ultimate Island Tour',
     tagline: 'The Complete Experience',
     description:
-      'The ultimate Mauritius adventure — Flat Island, Gabriel Island, and Coin de Mire in one unforgettable day. Private escape in the crystal-clear North lagoon with BBQ, drinks, music, and the option to add fresh lobster on request.',
-    duration: 'Full Day',
-    highlights: ['Flat Island · Gabriel · Coin de Mire', 'All-inclusive BBQ & drinks', 'Optional fresh lobster (500g)', 'Private boat up to 14 guests'],
+      'L\'expérience ultime autour de Maurice — Flat Island, Gabriel Island et Coin de Mire réunis en une seule journée d\'exception. Évasion privée dans le lagon nord cristallin, avec BBQ, boissons, musique et homard frais en option.',
+    duration: 'Journée complète',
+    highlights: [
+      'Flat Island · Gabriel · Coin de Mire',
+      'BBQ & boissons à volonté',
+      'Homard frais en option (500g)',
+      'Bateau privé · Max 14 personnes',
+    ],
     image: '/images/nb-13.jpg',
     badge: 'Best Value',
   },

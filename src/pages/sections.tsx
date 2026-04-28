@@ -102,7 +102,7 @@ export function ExperiencesSection() {
                 {tour.badge && (
                   <span
                     className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold text-white"
-                    style={{ background: idx === 2 ? 'oklch(0.75 0.13 65)' : 'oklch(0.78 0.14 195)' }}
+                    style={{ background: tour.badge === 'Best Value' ? 'oklch(0.75 0.13 65)' : 'oklch(0.78 0.14 195)' }}
                   >
                     {tour.badge}
                   </span>

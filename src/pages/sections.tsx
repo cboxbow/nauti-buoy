@@ -467,7 +467,7 @@ export function PricingSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           {PRICING_PLANS.map((plan) => (
             <motion.div
               key={plan.name} variants={fadeUp} whileHover={{ y: -6, transition: { duration: 0.3 } }}
@@ -479,26 +479,59 @@ export function PricingSection() {
                   {plan.badge}
                 </span>
               )}
-              <div className="mb-6">
+
+              {/* Name & description */}
+              <div className="mb-5">
                 <h3 className={`font-heading text-2xl mb-2 ${plan.highlighted ? 'text-white' : 'text-foreground'}`}>{plan.name}</h3>
                 <p className={`text-sm ${plan.highlighted ? 'text-white/70' : 'text-muted-foreground'}`}>{plan.description}</p>
               </div>
-              <div className="mb-6 pb-6 border-b" style={{ borderColor: plan.highlighted ? 'rgba(255,255,255,0.1)' : '' }}>
-                <div className="flex items-end gap-1">
+
+              {/* Price block */}
+              <div className="mb-6 pb-5 border-b" style={{ borderColor: plan.highlighted ? 'rgba(255,255,255,0.1)' : '' }}>
+                <div className="flex items-end gap-1 flex-wrap">
                   <span className={`text-4xl font-bold ${plan.highlighted ? 'text-white' : 'text-foreground'}`}>{plan.currency}{plan.price}</span>
                   <span className={`text-base mb-1.5 ${plan.highlighted ? 'text-white/60' : 'text-muted-foreground'}`}>/{plan.per}</span>
                 </div>
+                {plan.priceNote && (
+                  <p className="text-xs mt-1.5 font-medium" style={{ color: 'oklch(0.78 0.14 195)' }}>
+                    {plan.priceNote}
+                  </p>
+                )}
               </div>
-              <ul className="space-y-3 mb-8 flex-1">
+
+              {/* Key features */}
+              <ul className="space-y-2 mb-5">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-3">
                     <div className="w-5 h-5 rounded-full flex-shrink-0 mt-0.5 flex items-center justify-center" style={{ background: plan.highlighted ? 'oklch(0.78 0.14 195 / 0.3)' : 'oklch(0.78 0.14 195 / 0.12)' }}>
                       <Check className="w-3 h-3 text-primary" />
                     </div>
-                    <span className={`text-sm ${plan.highlighted ? 'text-white/80' : 'text-foreground/80'}`}>{f}</span>
+                    <span className={`text-sm font-medium ${plan.highlighted ? 'text-white/90' : 'text-foreground/90'}`}>{f}</span>
                   </li>
                 ))}
               </ul>
+
+              {/* Detailed sections (BBQ, drinks, extras) */}
+              <div className="space-y-4 mb-8 flex-1">
+                {plan.sections.map((sec) => (
+                  <div key={sec.title}>
+                    <p className={`text-xs font-bold uppercase tracking-wider mb-2 ${plan.highlighted ? 'text-white/50' : 'text-muted-foreground/70'}`}>
+                      {sec.title}
+                    </p>
+                    <ul className="space-y-1.5">
+                      {sec.items.map((item) => (
+                        <li key={item} className="flex items-start gap-2">
+                          <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: sec.isExtra ? 'oklch(0.75 0.13 65)' : 'oklch(0.78 0.14 195)' }} />
+                          <span className={`text-sm ${plan.highlighted ? (sec.isExtra ? 'text-amber-300' : 'text-white/75') : (sec.isExtra ? 'text-amber-700' : 'text-foreground/75')}`}>
+                            {item}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
               <a
                 href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
                 className={`w-full text-center py-4 rounded-full font-semibold text-base transition-all duration-200 hover:scale-105 ${plan.highlighted ? 'bg-primary text-primary-foreground' : 'border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground'}`}
@@ -511,7 +544,7 @@ export function PricingSection() {
         </div>
 
         <motion.p variants={fadeUp} className="text-center text-muted-foreground text-sm mt-8">
-          Tous les prix incluent l'équipement de snorkeling, le déjeuner BBQ et les boissons. Paiement sur place — espèces ou carte acceptés.
+          Paiement sur place — espèces ou carte acceptés. Départ : 08h30 · Retour : 15h30.
         </motion.p>
       </div>
     </Section>

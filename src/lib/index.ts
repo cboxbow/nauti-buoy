@@ -48,13 +48,21 @@ export interface Testimonial {
   avatar: string;
 }
 
+export interface PricingSection {
+  title: string;
+  items: string[];
+  isExtra?: boolean;
+}
+
 export interface PricingPlan {
   name: string;
   price: string;
+  priceNote?: string;
   currency: string;
   per: string;
   description: string;
   features: string[];
+  sections: PricingSection[];
   highlighted: boolean;
   badge?: string;
 }
@@ -232,36 +240,74 @@ export const TESTIMONIALS: Testimonial[] = [
 export const PRICING_PLANS: PricingPlan[] = [
   {
     name: 'Full Day — Partagé',
-    price: '2 200',
+    price: '2 500',
     currency: 'Rs ',
     per: 'par personne',
     description: 'Rejoignez un petit groupe pour une journée inoubliable dans le lagon du Nord.',
     features: [
+      'Départ 08h30 · Retour 15h30',
       'Max 14 personnes par bateau',
-      'Flat Island, Gabriel Island & Coin de Mire',
-      'Équipement snorkeling inclus',
-      'Déjeuner BBQ sur la plage',
-      'Boissons fraîches incluses',
-      'Skipper professionnel & guide',
-      'Départ : 8h30 — Cap Malheureux',
+      'Flat Island · Gabriel Island · Coin de Mire',
+      'Équipement snorkeling inclus (masques & tubas)',
+    ],
+    sections: [
+      {
+        title: '🍖 Déjeuner BBQ Complet',
+        items: [
+          'Filet de dorade, poulet & saucisses',
+          'Salade de chou, pâtes & pommes de terre',
+          'Pain à l\'ail',
+          'Dessert : fruits frais ou banane flambée',
+        ],
+      },
+      {
+        title: '🥤 Boissons incluses',
+        items: [
+          'Punch & bière',
+          'Coca-Cola, boissons gazeuses & eau minérale',
+        ],
+      },
     ],
     highlighted: false,
   },
   {
-    name: 'Full Day — Privatif',
-    price: '25 000',
+    name: 'Full Day — Privatisé',
+    price: '20 000',
+    priceNote: '+ Rs 1 000 / personne additionnelle',
     currency: 'Rs ',
-    per: 'le bateau entier',
-    description: 'Le bateau est rien que pour vous. Votre journée parfaite, à votre rythme.',
+    per: 'pour 2 personnes',
+    description: 'Usage exclusif du bateau avec itinéraire personnalisable, à votre rythme.',
     features: [
-      'Usage exclusif du speedboat',
+      'Usage exclusif du bateau',
+      'Départ 08h30 · Retour 15h30',
       'Itinéraire personnalisable',
-      'Flat Island · Gabriel · Coin de Mire',
-      'BBQ complet : poisson, crevettes grillées',
-      'Boissons alcoolisées & softs inclus',
-      'Skipper & guide personnel',
-      'Option : Homard frais 500g (supplément)',
-      'Décoration anniversaire / lune de miel sur demande',
+      'Équipement snorkeling inclus (masques & tubas)',
+    ],
+    sections: [
+      {
+        title: '🍖 Déjeuner BBQ Complet',
+        items: [
+          'Filet de dorade, poulet & saucisses',
+          'Salade de chou, pâtes & pommes de terre',
+          'Pain à l\'ail',
+          'Dessert : fruits frais ou banane flambée',
+        ],
+      },
+      {
+        title: '🥤 Boissons incluses',
+        items: [
+          'Punch & bière',
+          'Coca-Cola, boissons gazeuses & eau minérale',
+        ],
+      },
+      {
+        title: '✨ Suppléments en option',
+        items: [
+          'Vin rouge ou blanc : Rs 1 000',
+          'Homard frais 500g : Rs 1 200 / personne',
+        ],
+        isExtra: true,
+      },
     ],
     highlighted: true,
     badge: 'All Inclusive',

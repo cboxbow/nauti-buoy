@@ -6,7 +6,7 @@ export default function Tarifs() {
       <PageBanner
         tag="Tarifs"
         title="Prix Clairs & Transparents"
-        subtitle="Partagé ou privatif — aucun frais caché, paiement sur place. Rs 2 200/pers. ou Rs 25 000 le bateau entier."
+        subtitle="Partagé Rs 2 500/pers. · Privatisé dès Rs 20 000 pour 2 personnes — BBQ complet, boissons & snorkeling inclus. Paiement sur place."
         image="/images/nb-11.jpg"
       />
       <PricingSection />

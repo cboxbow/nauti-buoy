@@ -111,12 +111,35 @@ export function ExperiencesSection() {
               </div>
               <div className="p-6 flex flex-col flex-1">
                 <h3 className="font-heading text-2xl text-card-foreground mb-2">{tour.name}</h3>
-                <div className="flex items-center gap-2 text-primary text-sm font-medium mb-4">
+                <div className="flex items-center gap-2 text-primary text-sm font-medium mb-3">
                   <Clock className="w-4 h-4" />
                   <span>{tour.duration}</span>
                 </div>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-1">{tour.description}</p>
-                <div className="space-y-2 mb-6">
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4">{tour.description}</p>
+
+                {/* Itinerary stops (optional) */}
+                {tour.itinerary && (
+                  <div className="space-y-3 mb-4">
+                    <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground/60">Programme</p>
+                    {tour.itinerary.map((stop, si) => (
+                      <div key={si} className="flex gap-3">
+                        <div
+                          className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-white mt-0.5"
+                          style={{ background: 'linear-gradient(135deg, oklch(0.78 0.14 195), oklch(0.65 0.12 195))' }}
+                        >
+                          {si + 1}
+                        </div>
+                        <div>
+                          <p className="text-sm font-semibold text-foreground/90 leading-tight mb-0.5">{stop.title}</p>
+                          <p className="text-xs text-muted-foreground leading-relaxed">{stop.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Highlights */}
+                <div className="space-y-1.5 mb-6 flex-1">
                   {tour.highlights.map((h) => (
                     <div key={h} className="flex items-center gap-2 text-sm text-foreground/80">
                       <Check className="w-4 h-4 text-primary flex-shrink-0" />
@@ -124,6 +147,7 @@ export function ExperiencesSection() {
                     </div>
                   ))}
                 </div>
+
                 <a
                   href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
                   className="mt-auto w-full text-center py-3 rounded-full font-semibold text-sm transition-all duration-200 hover:scale-105 bg-primary text-primary-foreground"

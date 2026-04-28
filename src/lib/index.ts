@@ -16,11 +16,18 @@ export const WHATSAPP_MESSAGE = encodeURIComponent(
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
+export interface TourStop {
+  label: string;
+  title: string;
+  description: string;
+}
+
 export interface Tour {
   id: string;
   name: string;
   tagline: string;
   description: string;
+  itinerary?: TourStop[];
   duration: string;
   highlights: string[];
   image: string;
@@ -86,9 +93,29 @@ export const TOURS: Tour[] = [
     name: 'Flat Island & Gabriel',
     tagline: 'Pristine Lagoon Escape',
     description:
-      'Set sail from Cap Malheureux at 8:30 AM into the crystal-clear northern lagoon. Discover Flat Island\'s powder-white beaches and the emerald waters surrounding Gabriel Island. Snorkel vibrant reefs, swim in paradise, and feast on a freshly grilled BBQ lunch on the beach.',
+      'Trois îlots, une journée inoubliable. Snorkeling, tortues, BBQ sur la plage et eaux turquoise du lagon nord — départ 08h30 depuis l\'église de Cap Malheureux.',
+    itinerary: [
+      {
+        label: '1er arrêt',
+        title: 'Îlot Gabriel — Snorkeling & Tortues',
+        description:
+          'Explorez les fonds marins de l\'Îlot Gabriel. Avec un peu de chance, vous nagerez avec des tortues et des raies. Leur présence est fréquente mais non garantie à 100% — ce sont des animaux sauvages dans leur milieu naturel.',
+      },
+      {
+        label: '2ème arrêt',
+        title: 'Île Plate — Déjeuner & Détente',
+        description:
+          'Cap sur l\'Île Plate pour un délicieux déjeuner BBQ sur la plage. Profitez du sable blanc et de la mer turquoise pour vous détendre à votre rythme.',
+      },
+      {
+        label: '3ème arrêt',
+        title: 'Coin de Mire — Snorkeling Final',
+        description:
+          'Pour finir en beauté, 30 à 45 min autour du majestueux Coin de Mire — l\'endroit idéal pour le snorkeling avec une multitude de poissons tropicaux.',
+      },
+    ],
     duration: 'Full Day',
-    highlights: ['Flat Island & Gabriel Island stops', 'Snorkeling in coral reefs', 'BBQ lunch & refreshing drinks', 'Up to 14 guests max'],
+    highlights: ['Îlot Gabriel · Île Plate · Coin de Mire', 'Snorkeling & nage avec les tortues*', 'BBQ complet sur la plage', 'Max 14 personnes'],
     image: '/images/nb-1.jpg',
     badge: 'Most Popular',
   },

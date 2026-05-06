@@ -1,37 +1,58 @@
-import { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Volume2, VolumeX } from 'lucide-react';
+import { Volume2, VolumeX, Music2 } from 'lucide-react';
 import { WHATSAPP_URL } from '@/lib/index';
 import { ExperiencesSection, WhyUsSection, TestimonialsSection, CTASection } from '@/pages/sections';
 import { useLang } from '@/context/LanguageContext';
 import { T } from '@/lib/translations';
+import { useAmbientAudio } from '@/hooks/useAmbientAudio';
 
 // ─── HERO avec fond vidéo ──────────────────────────────────────────────────────
 function HeroSection() {
-  const { lang } = useLang();
-  const navigate = useNavigate();
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [muted, setMuted] = useState(true);
+  const { lang }    = useLang();
+  const navigate    = useNavigate();
+  const videoRef    = useRef<HTMLVideoElement>(null);
+  const [muted, setMuted]           = useState(true);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [musicOn, setMusicOn]       = useState(false);
+  const [showMusicHint, setShowMusicHint] = useState(false);
+  const { start: startMusic, stop: stopMusic, destroy } = useAmbientAudio();
 
-  const toggleSound = () => {
+  // Show music hint after 3 seconds to invite user
+  useEffect(() => {
+    const t = setTimeout(() => setShowMusicHint(true), 3000);
+    return () => clearTimeout(t);
+  }, []);
+
+  // Cleanup audio on unmount
+  useEffect(() => () => destroy(), [destroy]);
+
+  const toggleVideo = () => {
     if (videoRef.current) {
       videoRef.current.muted = !muted;
       setMuted((m) => !m);
     }
   };
 
+  const toggleMusic = () => {
+    setShowMusicHint(false);
+    if (musicOn) {
+      stopMusic();
+      setMusicOn(false);
+    } else {
+      startMusic();
+      setMusicOn(true);
+    }
+  };
+
   return (
     <section id="hero" className="relative w-full h-screen min-h-[600px] overflow-hidden flex items-center justify-center">
 
-      {/* ── Fond photo (fallback visible pendant chargement vidéo) ── */}
+      {/* ── Fond photo (fallback) ── */}
       <div
         className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
-        style={{
-          backgroundImage: "url('/images/nb-2.jpg')",
-          opacity: videoLoaded ? 0 : 1,
-        }}
+        style={{ backgroundImage: "url('/images/nb-2.jpg')", opacity: videoLoaded ? 0 : 1 }}
       />
 
       {/* ── Fond vidéo drone ── */}
@@ -39,11 +60,7 @@ function HeroSection() {
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
         style={{ opacity: videoLoaded ? 1 : 0 }}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
+        autoPlay muted loop playsInline preload="auto"
         onCanPlay={() => setVideoLoaded(true)}
       >
         <source src="/hero-video.mp4" type="video/mp4" />
@@ -64,20 +81,77 @@ function HeroSection() {
         />
       ))}
 
-      {/* ── Bouton Son ── */}
-      <motion.button
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 2 }}
-        onClick={toggleSound}
-        className="absolute top-24 right-5 z-20 flex items-center gap-2 px-3 py-2 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 text-white text-xs font-medium hover:bg-black/50 transition-all duration-200"
-        aria-label={muted ? 'Activer le son' : 'Couper le son'}
-      >
-        {muted
-          ? <><VolumeX className="w-4 h-4" /><span className="hidden sm:inline">{T.hero.sound[lang]}</span></>
-          : <><Volume2 className="w-4 h-4 text-primary" /><span className="hidden sm:inline text-primary">On</span></>
-        }
-      </motion.button>
+      {/* ── Contrôles audio (top-right) ── */}
+      <div className="absolute top-24 right-5 z-20 flex flex-col items-end gap-2">
+
+        {/* Bouton son vidéo */}
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 2 }}
+          onClick={toggleVideo}
+          className="flex items-center gap-2 px-3 py-2 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 text-white text-xs font-medium hover:bg-black/50 transition-all duration-200"
+          aria-label={muted ? 'Activer le son' : 'Couper le son'}
+        >
+          {muted
+            ? <><VolumeX className="w-4 h-4" /><span className="hidden sm:inline">{T.hero.sound[lang]}</span></>
+            : <><Volume2 className="w-4 h-4 text-primary" /><span className="hidden sm:inline text-primary">On</span></>
+          }
+        </motion.button>
+
+        {/* Bouton musique ambiante + hint */}
+        <div className="relative flex items-center gap-2">
+          {/* Hint bulle */}
+          <AnimatePresence>
+            {showMusicHint && !musicOn && (
+              <motion.div
+                initial={{ opacity: 0, x: 10, scale: 0.9 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: 10, scale: 0.9 }}
+                transition={{ duration: 0.35 }}
+                className="absolute right-full mr-3 whitespace-nowrap px-3 py-1.5 rounded-full bg-primary text-primary-foreground text-xs font-semibold shadow-lg pointer-events-none"
+              >
+                🎵 {lang === 'fr' ? 'Ambiance musicale' : 'Tropical music'}
+                <span className="absolute top-1/2 right-0 translate-x-full -translate-y-1/2 border-4 border-transparent border-l-primary" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 2.3 }}
+            onClick={toggleMusic}
+            className={`relative flex items-center gap-2 px-3 py-2 rounded-full backdrop-blur-sm border text-xs font-medium transition-all duration-300 ${
+              musicOn
+                ? 'bg-primary border-primary text-white shadow-lg shadow-primary/30'
+                : 'bg-black/30 border-white/20 text-white hover:bg-black/50'
+            }`}
+            aria-label={musicOn ? 'Couper la musique' : 'Activer la musique'}
+          >
+            <Music2 className={`w-4 h-4 ${musicOn ? 'animate-pulse' : ''}`} />
+            <span className="hidden sm:inline">
+              {musicOn
+                ? (lang === 'fr' ? 'Musique On' : 'Music On')
+                : (lang === 'fr' ? 'Musique' : 'Music')}
+            </span>
+            {/* Equalizer bars when playing */}
+            {musicOn && (
+              <span className="flex items-end gap-[2px] h-3">
+                {[0.6, 1, 0.7, 0.9, 0.5].map((h, i) => (
+                  <motion.span
+                    key={i}
+                    className="w-[2px] bg-white rounded-full"
+                    animate={{ scaleY: [h, 1, h * 0.4, 0.9, h] }}
+                    transition={{ duration: 0.6 + i * 0.1, repeat: Infinity, ease: 'easeInOut' }}
+                    style={{ height: '100%', transformOrigin: 'bottom' }}
+                  />
+                ))}
+              </span>
+            )}
+          </motion.button>
+        </div>
+      </div>
 
       {/* ── Contenu central ── */}
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">

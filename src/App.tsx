@@ -1,4 +1,5 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Layout } from '@/components/Layout';
 import { LanguageProvider } from '@/context/LanguageContext';
 import Home from '@/pages/home/index';
@@ -8,10 +9,17 @@ import Programme from '@/pages/programme/index';
 import Tarifs from '@/pages/tarifs/index';
 import Contact from '@/pages/contact/index';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, [pathname]);
+  return null;
+}
+
 export default function App() {
   return (
     <LanguageProvider>
       <Router>
+        <ScrollToTop />
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />

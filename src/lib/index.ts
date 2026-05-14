@@ -313,8 +313,8 @@ export const PRICING_PLANS: PricingPlan[] = [
   },
   {
     name: 'Full Day — Privatisé',
-    price: '20 000',
-    priceNote: '+ Rs 1 000 / personne additionnelle',
+    price: '24 000',
+    priceNote: '+ Rs 1 200 / personne additionnelle',
     currency: 'Rs ',
     per: 'pour 2 personnes',
     description: 'Usage exclusif du bateau avec itinéraire personnalisable, à votre rythme.',
@@ -344,8 +344,8 @@ export const PRICING_PLANS: PricingPlan[] = [
       {
         title: '✨ Suppléments en option',
         items: [
-          'Vin rouge ou blanc : Rs 1 000',
-          'Homard frais 500g : Rs 1 200 / personne',
+          'Vin rouge ou blanc : Rs 1 200',
+          'Homard frais 500g : Rs 1 440 / personne',
         ],
         isExtra: true,
       },

@@ -178,8 +178,8 @@ export const PRICING_PLANS_EN: PricingPlan[] = [
   },
   {
     name: 'Full Day — Private',
-    price: '20,000',
-    priceNote: '+ Rs 1,000 / additional guest',
+    price: '24,000',
+    priceNote: '+ Rs 1,200 / additional guest',
     currency: 'Rs ',
     per: 'for 2 guests',
     description: 'Exclusive boat use with customizable itinerary, at your own pace.',
@@ -209,8 +209,8 @@ export const PRICING_PLANS_EN: PricingPlan[] = [
       {
         title: '✨ Optional extras',
         items: [
-          'Red or white wine: Rs 1,000',
-          'Fresh lobster 500g: Rs 1,200 / guest',
+          'Red or white wine: Rs 1,200',
+          'Fresh lobster 500g: Rs 1,440 / guest',
         ],
         isExtra: true,
       },

@@ -149,7 +149,7 @@ export const T = {
     tarifs: {
       tag:   b('Tarifs', 'Pricing'),
       title: b('Prix Clairs & Transparents', 'Clear & Transparent Pricing'),
-      sub:   b('Partagé Rs 2 500/pers. · Privatisé dès Rs 20 000 pour 2 personnes — BBQ complet, boissons & snorkeling inclus. Paiement sur place.', 'Shared Rs 2,500/person · Private from Rs 20,000 for 2 — full BBQ, drinks & snorkeling included. Pay on site.'),
+      sub:   b('Partagé Rs 2 500/pers. · Privatisé dès Rs 24 000 pour 2 personnes — BBQ complet, boissons & snorkeling inclus. Paiement sur place.', 'Shared Rs 2,500/person · Private from Rs 24,000 for 2 — full BBQ, drinks & snorkeling included. Pay on site.'),
     },
     contact: {
       tag:   b('Contact', 'Contact'),

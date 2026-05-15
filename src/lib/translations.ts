@@ -83,7 +83,7 @@ export const T = {
     title:    b('Prix Clairs & Transparents', 'Clear & Transparent Pricing'),
     subtitle: b("Aucun frais caché. Aucune surprise. Juste une journée incroyable sur l'eau.", 'No hidden fees. No surprises. Just an incredible day on the water.'),
     cta:      b('Réserver via WhatsApp', 'Book via WhatsApp'),
-    footer:   b('Paiement sur place — espèces ou carte acceptés. Départ : 08h30 · Retour : 15h30.', 'Payment on site — cash or card accepted. Departure: 08:30 AM · Return: 3:30 PM.'),
+    footer:   b('Paiement sur place en espèces uniquement — Roupies mauriciennes (MUR) ou devises acceptées. Départ : 08h30 · Retour : 15h30.', 'Cash payment on site only — Mauritian Rupees (MUR) or foreign currency accepted. Departure: 08:30 AM · Return: 3:30 PM.'),
     transfer: {
       title:  b('🚐 Transfert depuis le Nord — en option', '🚐 North Transfer — optional'),
       desc:   b('Vous séjournez dans le Nord de Maurice ? Nous pouvons vous récupérer à votre hôtel ou villa et vous déposer au point de départ à Cap Malheureux.', 'Staying in North Mauritius? We can pick you up at your hotel or villa and drop you off at the Cap Malheureux departure point.'),

@@ -3,7 +3,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   Waves, MapPin, Ship, Users, Flame, Music,
   Anchor, Fish, Sun, Star, Check, Phone,
-  ChevronLeft, ChevronRight, X, Clock, Send, TreePalm,
+  ChevronLeft, ChevronRight, X, Clock, Send, TreePalm, Bus,
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -587,7 +587,33 @@ export function PricingSection() {
           ))}
         </div>
 
-        <motion.p variants={fadeUp} className="text-center text-muted-foreground text-sm mt-8">
+        {/* ── Bloc Transfert Nord ── */}
+        <motion.div
+          variants={fadeUp}
+          className="mt-10 rounded-2xl border border-primary/25 bg-primary/5 p-6 flex flex-col sm:flex-row items-start gap-5"
+        >
+          <div
+            className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
+            style={{ background: 'oklch(0.78 0.14 195 / 0.15)', border: '1px solid oklch(0.78 0.14 195 / 0.3)' }}
+          >
+            <Bus className="w-6 h-6 text-primary" />
+          </div>
+          <div className="flex-1">
+            <p className="font-semibold text-foreground text-base mb-1">{T.pricing.transfer.title[lang]}</p>
+            <p className="text-muted-foreground text-sm leading-relaxed mb-3">{T.pricing.transfer.desc[lang]}</p>
+            <div className="flex flex-wrap items-center gap-3">
+              <span
+                className="px-3 py-1 rounded-full text-sm font-bold text-white"
+                style={{ background: 'oklch(0.78 0.14 195)' }}
+              >
+                {T.pricing.transfer.price[lang]}
+              </span>
+              <span className="text-muted-foreground text-xs italic">{T.pricing.transfer.hint[lang]}</span>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.p variants={fadeUp} className="text-center text-muted-foreground text-sm mt-6">
           {T.pricing.footer[lang]}
         </motion.p>
       </div>
@@ -673,6 +699,7 @@ export function ContactSection() {
                 { icon: Phone, label: T.contact.phoneLabel[lang], value: '+230 5770 1684', href: 'tel:+23057701684' },
                 { icon: MapPin, label: T.contact.locLabel[lang], value: T.contact.locValue[lang], href: 'https://maps.google.com/?q=Cap+Malheureux+Church,+Mauritius' },
                 { icon: Clock, label: T.contact.hoursLabel[lang], value: T.contact.hoursValue[lang], href: undefined },
+                { icon: Bus, label: T.contact.transferLabel[lang], value: T.contact.transferValue[lang], href: undefined },
               ].map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex items-start gap-4 p-4 rounded-xl bg-card border border-border">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">

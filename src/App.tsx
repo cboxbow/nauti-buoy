@@ -8,6 +8,7 @@ import Galerie from '@/pages/galerie/index';
 import Programme from '@/pages/programme/index';
 import Tarifs from '@/pages/tarifs/index';
 import Contact from '@/pages/contact/index';
+import Benitiers from '@/pages/benitiers/index';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="/programme" element={<Programme />} />
             <Route path="/tarifs" element={<Tarifs />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/benitiers" element={<Benitiers />} />
           </Routes>
         </Layout>
       </Router>

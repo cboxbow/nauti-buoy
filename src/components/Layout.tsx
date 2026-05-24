@@ -7,11 +7,12 @@ import { useLang } from '@/context/LanguageContext';
 import { T } from '@/lib/translations';
 
 const NAV_PATHS = [
-  { key: 'excursions', path: '/excursions' },
-  { key: 'galerie',    path: '/galerie'    },
-  { key: 'programme',  path: '/programme'  },
-  { key: 'tarifs',     path: '/tarifs'     },
-  { key: 'contact',    path: '/contact'    },
+  { key: 'excursions', path: '/excursions',  special: false },
+  { key: 'galerie',    path: '/galerie',     special: false },
+  { key: 'programme',  path: '/programme',   special: false },
+  { key: 'tarifs',     path: '/tarifs',      special: false },
+  { key: 'contact',    path: '/contact',     special: false },
+  { key: 'benitiers',  path: '/benitiers',   special: true  },
 ] as const;
 
 const WA_SVG = (
@@ -75,10 +76,27 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </button>
 
           {/* ── COL 2 : NAV LINKS (desktop, centré) ── */}
-          <nav className="hidden md:flex items-center justify-center gap-7">
+          <nav className="hidden md:flex items-center justify-center gap-5">
             {NAV_PATHS.map((link) => {
               const active = location.pathname === link.path;
               const label  = T.nav[link.key][lang];
+              if (link.special) {
+                return (
+                  <button
+                    key={link.path}
+                    onClick={() => navigate(link.path)}
+                    className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-all duration-200 ${
+                      active
+                        ? 'bg-primary text-white border-primary'
+                        : solidNav
+                          ? 'border-primary/40 text-primary hover:bg-primary hover:text-white'
+                          : 'border-white/40 text-white hover:bg-white/15'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              }
               return (
                 <button
                   key={link.path}

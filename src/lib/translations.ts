@@ -9,6 +9,7 @@ export const T = {
     programme:  b('Programme', 'Schedule'),
     tarifs:     b('Tarifs', 'Pricing'),
     contact:    b('Contact', 'Contact'),
+    benitiers:  b('🐬 Dauphins & Bénitiers', '🐬 Dolphins & Bénitiers'),
     book:       b('Réserver', 'Book Now'),
     bookWA:     b('Réserver via WhatsApp', 'Book via WhatsApp'),
   },
@@ -163,6 +164,11 @@ export const T = {
       tag:   b('Contact', 'Contact'),
       title: b('Planifions Votre Escapade', 'Plan Your Escape'),
       sub:   b('Répondons en quelques minutes sur WhatsApp. Départ depuis Cap Malheureux à 8h30.', 'We reply in minutes on WhatsApp. Departure from Cap Malheureux at 8:30 AM.'),
+    },
+    benitiers: {
+      tag:   b('Excursion Spéciale', 'Special Excursion'),
+      title: b('Île aux Bénitiers & Dauphins', 'Île aux Bénitiers & Dolphins'),
+      sub:   b('Départ 08h30 · Cap Malheureux · 2h de navigation le long de la côte ouest · Nage avec les dauphins · Pique-nique sur l\'île', 'Departure 08:30 · Cap Malheureux · 2h cruising the west coast · Swim with dolphins · Picnic on the island'),
     },
   },
 };

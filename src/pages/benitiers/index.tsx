@@ -9,7 +9,7 @@ import { WHATSAPP_URL } from '@/lib/index';
 const CONTENT = {
   fr: {
     heroTag: '✨ Excursion exclusive · Côte Ouest',
-    heroTitle: 'Dauphins, Baleines & Île aux Bénitiers',
+    heroTitle: 'Tortues, Dauphins, Baleines & Île aux Bénitiers',
     heroSub: 'La journée la plus extraordinaire de votre séjour à Maurice',
     heroCta: 'Réserver via WhatsApp',
 
@@ -67,7 +67,7 @@ const CONTENT = {
 
   en: {
     heroTag: '✨ Exclusive Excursion · West Coast',
-    heroTitle: 'Dolphins, Whales & Île aux Bénitiers',
+    heroTitle: 'Turtles, Dolphins, Whales & Île aux Bénitiers',
     heroSub: 'The most extraordinary day of your Mauritius stay',
     heroCta: 'Book via WhatsApp',
 

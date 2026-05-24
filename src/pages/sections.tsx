@@ -689,15 +689,15 @@ export function ContactSection() {
           <motion.div variants={fadeUp} className="space-y-6">
             <div className="rounded-2xl overflow-hidden shadow-lg" style={{ height: '280px' }}>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60208.70456888745!2d57.5292!3d-20.0132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x217c5006e3db0001%3A0x8beebb35bfbce3ba!2sNorth%20Mauritius!5e0!3m2!1sen!2smu!4v1720000000000!5m2!1sen!2smu"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3744.7!2d57.6193785!3d-19.9865924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x217daba5efaa38d5%3A0xb27b4d681ecf3f15!2sNauti%20Buoy%20Mauritius!5e0!3m2!1sfr!2smu!4v1748000000000!5m2!1sfr!2smu"
                 width="100%" height="100%" style={{ border: 0, display: 'block' }}
-                allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Cap Malheureux map"
+                allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Nauti Buoy Mauritius - Cap Malheureux"
               />
             </div>
             <div className="space-y-4">
               {[
                 { icon: Phone, label: T.contact.phoneLabel[lang], value: '+230 5770 1684', href: 'tel:+23057701684' },
-                { icon: MapPin, label: T.contact.locLabel[lang], value: T.contact.locValue[lang], href: 'https://maps.google.com/?q=Cap+Malheureux+Church,+Mauritius' },
+                { icon: MapPin, label: T.contact.locLabel[lang], value: T.contact.locValue[lang], href: 'https://maps.app.goo.gl/geM15BeHAi95Dp5f7' },
                 { icon: Clock, label: T.contact.hoursLabel[lang], value: T.contact.hoursValue[lang], href: undefined },
                 { icon: Bus, label: T.contact.transferLabel[lang], value: T.contact.transferValue[lang], href: undefined },
               ].map(({ icon: Icon, label, value, href }) => (

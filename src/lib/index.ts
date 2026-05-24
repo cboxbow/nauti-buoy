@@ -231,49 +231,49 @@ export const TIMELINE: TimelineItem[] = [
   },
 ];
 
-// ─── Testimonials ─────────────────────────────────────────────────────────────
+// ─── Testimonials (vrais avis Google) ─────────────────────────────────────────
 export const TESTIMONIALS: Testimonial[] = [
   {
-    name: 'Sophie & Marc',
-    location: 'Paris, France',
+    name: 'Teddy',
+    location: 'Google Reviews',
     rating: 5,
-    text: 'Best day of our entire honeymoon. The sandbank was absolutely unreal — turquoise water, just us and the horizon. The BBQ prawns? Incredible. We\'re already planning our return.',
+    text: "Incroyable comme expérience, franchement je suis visiteur régulier j'hésiterais pas à revenir vers vous merci encore.",
+    avatar: 'T',
+  },
+  {
+    name: 'Liam Apostin',
+    location: 'Google Reviews',
+    rating: 5,
+    text: "Super expérience du début à la fin ! La nourriture était vraiment bonne, l'ambiance au top et l'équipe très accueillante. Franchement, l'excursion vaut totalement le coup si vous voulez passer une excellente journée dans le nord de l'île.",
+    avatar: 'LA',
+  },
+  {
+    name: 'Steven Moron',
+    location: 'Google Reviews',
+    rating: 5,
+    text: "Super expérience avec Nauti Buoy Mauritius ! L'équipe est très professionnelle, accueillante et met directement à l'aise. Le bateau était propre, bien entretenu et la sortie était incroyable du début à la fin. Les paysages sont magnifiques.",
     avatar: 'SM',
   },
   {
-    name: 'James Whitfield',
-    location: 'London, UK',
+    name: 'Ludovic Rouland',
+    location: 'Google Reviews',
     rating: 5,
-    text: 'I\'ve been on boat tours worldwide — Bali, Maldives, Greece. This was honestly top 3. The skippers know every perfect spot. Small group, great vibe, and photos I\'ll show forever.',
-    avatar: 'JW',
+    text: "Superbe excursion en mer ! Le bateau est top, l'ambiance est au rendez-vous du début à la fin. Si vous cherchez une sortie en mer mémorable, foncez les yeux fermés. Je recommande à 100 % !",
+    avatar: 'LR',
   },
   {
-    name: 'Ananya Sharma',
-    location: 'Mumbai, India',
+    name: 'Kim C',
+    location: 'Local Guide · Google',
     rating: 5,
-    text: 'We saw sea turtles! Genuinely the most magical moment. The water is so clear it doesn\'t feel real. Booking was easy via WhatsApp and the crew was so warm and professional.',
-    avatar: 'AS',
+    text: "Très belle journée avec Nauti Buoy. Excellent service, super bateau très moderne et spacieux (nous étions 11 personnes et très confortables). La nourriture était vraiment bonne. Une journée parfaite grâce à l'équipe de Nauti Buoy et à leur super bateau. Je recommande fortement !",
+    avatar: 'KC',
   },
   {
-    name: 'Thomas & Léa',
-    location: 'Brussels, Belgium',
+    name: 'Tessa de Chalain',
+    location: 'Local Guide · Google',
     rating: 5,
-    text: 'Île Plate is paradise on earth. The snorkeling was world-class and the BBQ on the beach with local music playing... we didn\'t want to leave. Unforgettable experience.',
-    avatar: 'TL',
-  },
-  {
-    name: 'Sarah Johnson',
-    location: 'Cape Town, SA',
-    rating: 5,
-    text: 'Booked the private boat for my birthday. Best decision ever. The team decorated the boat, surprised me with a cake on the sandbank. Moments I\'ll treasure for life.',
-    avatar: 'SJ',
-  },
-  {
-    name: 'Hiroshi Tanaka',
-    location: 'Tokyo, Japan',
-    rating: 5,
-    text: 'Professional, safe, and incredibly fun. The lagoon colours are beyond what any photo can capture. The fresh seafood BBQ was exceptional. Will recommend to everyone visiting Mauritius.',
-    avatar: 'HT',
+    text: "Great service, amazing experience. Very comfy speed boat. We went to flat island with friends and had a blast.",
+    avatar: 'TC',
   },
 ];
 

@@ -439,7 +439,7 @@ export function TestimonialsSection() {
             {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-gold fill-gold" />)}
             <span className="ml-2 font-semibold text-foreground">5.0</span>
             <a
-              href="https://maps.app.goo.gl/suW49yRbpDZb2uKE6"
+              href="https://maps.app.goo.gl/dPxggeti24UQ9DLU8"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground ml-1 hover:text-primary transition-colors underline underline-offset-2 decoration-dotted"

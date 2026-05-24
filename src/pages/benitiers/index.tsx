@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Check, Clock, Anchor, Fish, TreePalm, Sun, AlertTriangle, Users } from 'lucide-react';
+import { Check, Clock, Anchor, Fish, TreePalm, Sun, AlertTriangle, Users, Waves, Mountain } from 'lucide-react';
 import { PageBanner, Section, fadeUp, CTASection } from '@/pages/sections';
 import { useLang } from '@/context/LanguageContext';
 import { T } from '@/lib/translations';
@@ -8,76 +8,173 @@ import { WHATSAPP_URL } from '@/lib/index';
 // ─── Contenu bilingue ─────────────────────────────────────────────────────────
 const CONTENT = {
   fr: {
-    intro: "Au départ de Cap Malheureux à 08h30, le bateau longe toute la côte ouest de Maurice — environ 2 heures de navigation dans des eaux peu fréquentées. C'est dans ce couloir naturel que vivent en liberté les dauphins de l'île Maurice. L'arrêt en mer permet de les observer de près et, selon les conditions, de nager à leurs côtés.",
-    intro2: "L'excursion se poursuit jusqu'à l'Île aux Bénitiers, îlot protégé du lagon ouest, accessible uniquement par bateau. Eau peu profonde, sable blanc et cadre préservé — idéal pour se baigner, faire du snorkeling et pique-niquer.",
+    intro: "Au départ de Cap Malheureux à 08h30, le bateau file vers le sud en longeant toute la côte ouest de Maurice — deux heures de navigation à travers des eaux peu fréquentées, entre récifs coralliens et paysages vierges. C'est ici, dans ce couloir naturel classé, que vivent en liberté les dauphins de l'île.",
+    intro2: "Le bateau s'immobilise au cœur de leur territoire. Ils arrivent par dizaines, parfois par centaines — spinner dolphins bondissant, plongeant, jouant dans le sillage. Un spectacle d'une rare intensité, en pleine mer, sans enclos ni artifice. La navigation se poursuit ensuite vers l'Île aux Bénitiers, joyau du lagon ouest, accessible uniquement par bateau.",
+
+    sightsTitle: 'Ce que vous allez voir & vivre',
+    sights: [
+      {
+        icon: '🐬',
+        title: 'Dauphins en pleine mer',
+        desc: "Des centaines de spinner dolphins évoluent librement autour du bateau. Bonds spectaculaires, acrobaties naturelles — un moment d'une intensité rare.",
+      },
+      {
+        icon: '🐋',
+        title: 'Baleines à bosse',
+        desc: 'De juin à octobre, les baleines à bosse longent la côte ouest lors de leur migration. Leur présence, silencieuse et majestueuse, est l\'une des plus belles rencontres possibles en mer.',
+      },
+      {
+        icon: '🏔️',
+        title: 'Le Morne Brabant',
+        desc: 'Le massif volcanique du Morne — classé Patrimoine Mondial UNESCO — surgit de l\'océan face à vous. Une toile de fond épique pour une journée inoubliable.',
+      },
+      {
+        icon: '🐢',
+        title: 'Tortues marines',
+        desc: 'Le lagon de l\'Île aux Bénitiers abrite des tortues vertes et des tortues imbriquées. Observation depuis le bateau ou en snorkeling dans leurs eaux cristallines.',
+      },
+      {
+        icon: '🪸',
+        title: 'Snorkeling & récifs',
+        desc: 'Eaux turquoise peu profondes, coraux vivants, poissons tropicaux aux couleurs vives. L\'Île aux Bénitiers offre l\'un des meilleurs sites de snorkeling de l\'ouest.',
+      },
+      {
+        icon: '🌅',
+        title: 'Côte sauvage & préservée',
+        desc: 'La côte ouest est la plus intacte de Maurice. Deux heures de navigation face à des falaises, une végétation tropicale dense et un lagon d\'un bleu profond — sans construction à l\'horizon.',
+      },
+      {
+        icon: '🏝️',
+        title: 'Île aux Bénitiers',
+        desc: 'Sable blanc immaculé, eau peu profonde d\'un turquoise absolu, silence total. Un îlot protégé accessible uniquement par bateau — l\'un des plus beaux endroits de l\'île Maurice.',
+      },
+      {
+        icon: '🧺',
+        title: 'Pique-nique sur l\'île',
+        desc: 'Repas servi sur l\'île dans un cadre de rêve. Pieds dans le sable, lagon turquoise, brise marine — le genre de déjeuner dont on se souvient toute une vie.',
+      },
+    ],
+
     programmeTitle: 'Programme de la journée',
     programme: [
-      { time: '08h30', title: 'Départ Cap Malheureux', desc: 'Embarquement sur le bateau depuis la plage de l\'église de Cap Malheureux. Cap vers le sud, longeant toute la côte ouest.', icon: Anchor },
-      { time: '~10h30', title: 'Rencontre avec les dauphins', desc: 'Arrêt en pleine mer dans les zones fréquentées par les dauphins. Observation depuis le bateau et nage avec eux selon les conditions du jour.', icon: Fish },
-      { time: '~11h30', title: 'Arrivée Île aux Bénitiers', desc: 'Accostage sur l\'îlot protégé du lagon ouest. Baignade en eau peu profonde et snorkeling dans les eaux cristallines.', icon: TreePalm },
-      { time: '~13h00', title: 'Pique-nique sur l\'île', desc: 'Repas pique-nique sur place dans un cadre paradisiaque. Sable blanc, lagon turquoise, silence absolu.', icon: Sun },
-      { time: '~16h00', title: 'Retour Cap Malheureux', desc: 'Navigation retour vers le nord en longeant à nouveau la côte ouest. Arrivée à Cap Malheureux en fin d\'après-midi.', icon: Anchor },
+      { time: '08h30', title: 'Départ Cap Malheureux', desc: 'Embarquement depuis la plage de l\'église de Cap Malheureux. Le bateau met le cap au sud, longeant la côte ouest face aux premières lumières du matin.', icon: Anchor },
+      { time: '~10h00', title: 'Rencontre avec les dauphins', desc: 'Arrêt en pleine mer dans le couloir naturel des dauphins. Des centaines de spinner dolphins évoluent autour du bateau — bonds, plongeons, acrobaties. L\'une des expériences les plus marquantes de la journée.', icon: Fish },
+      { time: '~11h30', title: 'Arrivée Île aux Bénitiers', desc: 'Accostage sur l\'îlot protégé. Baignade en eau peu profonde, snorkeling avec masques et tubas fournis. Observation des tortues marines, des coraux et des poissons tropicaux.', icon: TreePalm },
+      { time: '~13h00', title: 'Pique-nique sur l\'île', desc: 'Repas servi sur place dans un cadre exceptionnel. Sable blanc, lagon turquoise, calme absolu. Le temps s\'arrête.', icon: Sun },
+      { time: '~14h30', title: 'Navigation retour — côte sauvage', desc: 'Retour vers le nord en longeant à nouveau la côte ouest. Le Morne Brabant en toile de fond, récifs coralliens visibles sous la surface, eaux d\'un bleu profond.', icon: Waves },
+      { time: '~16h00', title: 'Retour Cap Malheureux', desc: 'Arrivée en fin d\'après-midi, la tête pleine de souvenirs et les yeux encore éblouis.', icon: Anchor },
     ],
-    includedTitle: 'Inclus dans l\'excursion',
+
+    includedTitle: 'Tout inclus dans l\'excursion',
     included: [
-      'Transport en bateau privé — Max 14 personnes',
-      'Navigation côte ouest complète (aller-retour)',
-      'Arrêt dauphins en pleine mer',
-      'Masques & tubas fournis',
+      'Bateau privé — Max 14 personnes',
+      'Navigation complète côte ouest (aller-retour)',
+      'Observation des dauphins en pleine mer',
+      'Masques & tubas professionnels fournis',
       'Pique-nique sur l\'Île aux Bénitiers',
-      'Boissons (eau, sodas, punch)',
+      'Boissons fraîches (eau, sodas, punch maison)',
+      'Skipper professionnel & équipage expérimenté',
+      'Jumelles à bord pour l\'observation des baleines',
     ],
-    highlightsTitle: 'Points forts',
-    highlights: [
-      { icon: '🐬', title: 'Dauphins en liberté', desc: 'Nage et observation dans leur milieu naturel, sans enclos ni captivité.' },
-      { icon: '🌊', title: 'Côte ouest sauvage', desc: '2h de navigation face aux paysages les plus préservés de Maurice.' },
-      { icon: '🏝️', title: 'Île aux Bénitiers', desc: 'Lagon protégé, eau peu profonde idéale pour snorkeling et baignade.' },
-      { icon: '🧺', title: 'Pique-nique sur l\'île', desc: 'Repas dans un cadre dépaysant, les pieds dans le sable blanc.' },
-    ],
+
     warningTitle: 'Information importante',
-    warning: 'La présence des dauphins n\'est pas garantie — ils évoluent en liberté dans leur milieu naturel. Les conditions météorologiques peuvent influencer le déroulement de l\'excursion.',
+    warning: 'La présence des dauphins et des baleines n\'est pas garantie — ils évoluent librement dans leur milieu naturel. En conformité avec la législation mauricienne, la nage avec les dauphins est interdite. Les conditions météorologiques peuvent influencer le déroulement de l\'excursion.',
+
     ctaTitle: 'Réserver cette excursion',
-    ctaSub: 'Contactez-nous sur WhatsApp pour connaître les disponibilités et les tarifs.',
+    ctaSub: 'Contactez-nous sur WhatsApp pour les disponibilités et les tarifs. Réponse rapide garantie.',
     ctaBtn: 'Réserver via WhatsApp',
+
     duration: 'Journée complète · 08h30 → ~16h00',
     capacity: 'Max 14 personnes',
     depart: 'Cap Malheureux, Nord Maurice',
+
+    seasonTitle: '🐋 Bonus saisonnier',
+    seasonText: 'De juin à octobre, les baleines à bosse migrent le long de la côte ouest de Maurice. Leur présence lors de l\'excursion est l\'une des rencontres les plus rares et les plus émouvantes que l\'océan puisse offrir.',
   },
+
   en: {
-    intro: "Departing from Cap Malheureux at 08:30, the boat cruises the entire west coast of Mauritius — about 2 hours of sailing through largely untouched waters. This natural corridor is home to Mauritius's free-living dolphin population. We stop at sea to observe them up close and, conditions permitting, swim alongside them.",
-    intro2: "The excursion continues to Île aux Bénitiers, a protected islet in the west lagoon, accessible only by boat. Shallow water, white sand and a pristine setting — ideal for swimming, snorkeling and a picnic.",
+    intro: "Departing Cap Malheureux at 08:30, the boat heads south along the entire west coast of Mauritius — two hours of sailing through largely untouched waters, past coral reefs and pristine landscapes. This protected natural corridor is home to Mauritius's wild dolphin population.",
+    intro2: "The boat stops in the heart of their territory. They arrive in their dozens — sometimes hundreds — spinner dolphins leaping, diving, playing in the wake. A raw, spectacular show in the open ocean, with no enclosures, no staging. The journey then continues to Île aux Bénitiers, the jewel of the west lagoon, accessible only by boat.",
+
+    sightsTitle: 'What You Will See & Experience',
+    sights: [
+      {
+        icon: '🐬',
+        title: 'Dolphins in the Wild',
+        desc: "Hundreds of spinner dolphins move freely around the boat. Spectacular leaps, natural acrobatics — a moment of rare intensity you won't find anywhere else.",
+      },
+      {
+        icon: '🐋',
+        title: 'Humpback Whales',
+        desc: 'From June to October, humpback whales migrate along the west coast. Their silent, majestic presence is one of the most breathtaking encounters the ocean can offer.',
+      },
+      {
+        icon: '🏔️',
+        title: 'Le Morne Brabant',
+        desc: 'The volcanic massif of Le Morne — a UNESCO World Heritage Site — rises dramatically from the ocean before you. An epic backdrop for an unforgettable day at sea.',
+      },
+      {
+        icon: '🐢',
+        title: 'Sea Turtles',
+        desc: 'The Île aux Bénitiers lagoon is home to green and hawksbill sea turtles. Spot them from the boat or while snorkeling in the crystal-clear water.',
+      },
+      {
+        icon: '🪸',
+        title: 'Snorkeling & Reefs',
+        desc: 'Shallow turquoise water, living coral, vibrant tropical fish. Île aux Bénitiers offers one of the finest snorkeling spots on the entire west coast.',
+      },
+      {
+        icon: '🌅',
+        title: 'Wild & Pristine Coastline',
+        desc: "The west coast is Mauritius's most unspoiled shore. Two hours of sailing past cliffs, dense tropical vegetation and a deep-blue lagoon — not a building in sight.",
+      },
+      {
+        icon: '🏝️',
+        title: 'Île aux Bénitiers',
+        desc: 'Immaculate white sand, shallow absolute-turquoise water, total silence. A protected islet reachable only by boat — one of the most beautiful places in Mauritius.',
+      },
+      {
+        icon: '🧺',
+        title: 'Island Picnic',
+        desc: 'Lunch served on the island in a dreamlike setting. Feet in the sand, turquoise lagoon, sea breeze — the kind of meal you remember for a lifetime.',
+      },
+    ],
+
     programmeTitle: 'Day Programme',
     programme: [
-      { time: '08:30', title: 'Departure Cap Malheureux', desc: 'Board the boat from Cap Malheureux Church beach. Head south along the entire west coast.', icon: Anchor },
-      { time: '~10:30', title: 'Dolphin Encounter', desc: 'Stop at sea in areas frequented by dolphins. Observe from the boat and swim with them depending on the day\'s conditions.', icon: Fish },
-      { time: '~11:30', title: 'Arrival Île aux Bénitiers', desc: 'Landing on the protected west lagoon islet. Swimming in shallow water and snorkeling in crystal-clear waters.', icon: TreePalm },
-      { time: '~13:00', title: 'Picnic on the Island', desc: 'Lunch picnic in a paradisiacal setting. White sand, turquoise lagoon, absolute silence.', icon: Sun },
-      { time: '~16:00', title: 'Return to Cap Malheureux', desc: 'Return navigation northward along the west coast again. Arrival at Cap Malheureux in the late afternoon.', icon: Anchor },
+      { time: '08:30', title: 'Departure Cap Malheureux', desc: 'Board from Cap Malheureux Church beach. The boat heads south, tracing the west coast in the soft morning light.', icon: Anchor },
+      { time: '~10:00', title: 'Dolphin Encounter', desc: "Stop at sea in the dolphins' natural corridor. Hundreds of spinner dolphins swirl around the boat — leaping, diving, performing. One of the most powerful moments of the day.", icon: Fish },
+      { time: '~11:30', title: 'Île aux Bénitiers', desc: 'Landing on the protected islet. Swimming in shallow water, snorkeling with provided masks and fins. Watch for sea turtles, coral gardens and tropical fish.', icon: TreePalm },
+      { time: '~13:00', title: 'Island Picnic', desc: 'Lunch served on the island in an exceptional setting. White sand, turquoise lagoon, absolute calm. Time stops here.', icon: Sun },
+      { time: '~14:30', title: 'Return — Wild Coast', desc: 'Northward return along the west coast. Le Morne Brabant as your backdrop, coral reefs visible through the surface, deep blue all around.', icon: Waves },
+      { time: '~16:00', title: 'Return Cap Malheureux', desc: 'Arrival in the late afternoon, eyes still dazzled, memories locked in forever.', icon: Anchor },
     ],
-    includedTitle: 'What\'s Included',
+
+    includedTitle: "What's Included",
     included: [
-      'Private boat transfer — Max 14 guests',
+      'Private boat — Max 14 guests',
       'Full west coast navigation (return)',
-      'Dolphin stop at sea',
-      'Masks & snorkels provided',
+      'Wild dolphin encounter at sea',
+      'Professional masks & snorkels provided',
       'Picnic on Île aux Bénitiers',
-      'Drinks (water, sodas, punch)',
+      'Fresh drinks (water, sodas, homemade punch)',
+      'Professional skipper & experienced crew',
+      'Binoculars on board for whale watching',
     ],
-    highlightsTitle: 'Highlights',
-    highlights: [
-      { icon: '🐬', title: 'Wild Dolphins', desc: 'Swim and observe in their natural habitat — no enclosures, no captivity.' },
-      { icon: '🌊', title: 'Wild West Coast', desc: '2h of sailing past Mauritius\'s most preserved landscapes.' },
-      { icon: '🏝️', title: 'Île aux Bénitiers', desc: 'Protected lagoon, shallow water perfect for snorkeling and swimming.' },
-      { icon: '🧺', title: 'Island Picnic', desc: 'Lunch in a stunning setting, feet in the white sand.' },
-    ],
+
     warningTitle: 'Important Notice',
-    warning: 'Dolphin sightings are not guaranteed — they live freely in their natural environment. Weather conditions may affect the excursion.',
+    warning: 'Dolphin and whale sightings are not guaranteed — they live freely in their natural environment. In accordance with Mauritian law, swimming with dolphins is prohibited. Weather conditions may affect the excursion.',
+
     ctaTitle: 'Book This Excursion',
-    ctaSub: 'Contact us on WhatsApp for availability and pricing.',
+    ctaSub: 'Contact us on WhatsApp for availability and pricing. Fast reply guaranteed.',
     ctaBtn: 'Book via WhatsApp',
+
     duration: 'Full Day · 08:30 → ~16:00',
     capacity: 'Max 14 guests',
     depart: 'Cap Malheureux, North Mauritius',
+
+    seasonTitle: '🐋 Seasonal Bonus',
+    seasonText: 'From June to October, humpback whales migrate along the Mauritius west coast. Spotting them during your excursion is one of the rarest and most moving encounters the ocean can offer.',
   },
 };
 
@@ -96,7 +193,7 @@ export default function Benitiers() {
         image="/images/nb-7.jpg"
       />
 
-      {/* ── Intro + méta-infos ── */}
+      {/* ── Intro ── */}
       <Section className="py-20 px-4 bg-background">
         <div className="max-w-5xl mx-auto">
 
@@ -115,20 +212,36 @@ export default function Benitiers() {
           </motion.div>
 
           {/* Texte intro */}
-          <motion.div variants={fadeUp} className="prose prose-lg max-w-none text-muted-foreground space-y-4 text-center mb-16">
-            <p className="text-lg leading-relaxed">{c.intro}</p>
-            <p className="text-lg leading-relaxed">{c.intro2}</p>
+          <motion.div variants={fadeUp} className="max-w-3xl mx-auto text-center space-y-5 mb-16">
+            <p className="text-lg leading-relaxed text-muted-foreground">{c.intro}</p>
+            <p className="text-lg leading-relaxed text-muted-foreground">{c.intro2}</p>
           </motion.div>
 
-          {/* Points forts */}
-          <motion.div variants={fadeUp} className="mb-16">
-            <h2 className="font-heading text-2xl text-foreground text-center mb-8">{c.highlightsTitle}</h2>
+          {/* Bonus saisonnier */}
+          <motion.div
+            variants={fadeUp}
+            className="mb-16 rounded-2xl p-6 flex items-start gap-5 border"
+            style={{ background: 'linear-gradient(135deg, oklch(0.22 0.08 240 / 0.06) 0%, oklch(0.18 0.06 220 / 0.04) 100%)', borderColor: 'oklch(0.78 0.14 195 / 0.3)' }}
+          >
+            <span className="text-3xl flex-shrink-0 mt-0.5">🐋</span>
+            <div>
+              <p className="font-semibold text-foreground mb-1">{c.seasonTitle}</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">{c.seasonText}</p>
+            </div>
+          </motion.div>
+
+          {/* Ce que vous allez voir */}
+          <motion.div variants={fadeUp}>
+            <h2 className="font-heading text-2xl md:text-3xl text-foreground text-center mb-10">{c.sightsTitle}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {c.highlights.map((h) => (
-                <div key={h.title} className="p-5 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 text-center">
-                  <span className="text-3xl mb-3 block">{h.icon}</span>
-                  <h3 className="font-semibold text-foreground mb-2">{h.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{h.desc}</p>
+              {c.sights.map((s) => (
+                <div
+                  key={s.title}
+                  className="p-5 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300 text-center group"
+                >
+                  <span className="text-3xl mb-3 block group-hover:scale-110 transition-transform duration-300">{s.icon}</span>
+                  <h3 className="font-semibold text-foreground mb-2 text-sm">{s.title}</h3>
+                  <p className="text-muted-foreground text-xs leading-relaxed">{s.desc}</p>
                 </div>
               ))}
             </div>
@@ -169,7 +282,7 @@ export default function Benitiers() {
                         <span className="font-mono text-sm font-bold px-2.5 py-1 rounded-full" style={{ background: 'oklch(0.78 0.14 195 / 0.2)', color: 'oklch(0.78 0.14 195)' }}>
                           {item.time}
                         </span>
-                        <h3 className="font-semibold text-white text-lg">{item.title}</h3>
+                        <h3 className="font-semibold text-white text-base">{item.title}</h3>
                       </div>
                       <p className="text-white/65 text-sm leading-relaxed">{item.desc}</p>
                     </div>
@@ -181,7 +294,7 @@ export default function Benitiers() {
         </div>
       </Section>
 
-      {/* ── Inclus + Avertissement ── */}
+      {/* ── Inclus + CTA + Avertissement ── */}
       <Section className="py-20 px-4 bg-background">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">

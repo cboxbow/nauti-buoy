@@ -437,7 +437,7 @@ export function TestimonialsSection() {
           <h2 className="font-heading text-4xl md:text-5xl text-foreground mb-4">{T.testimonials.title[lang]}</h2>
           <div className="flex items-center justify-center gap-1 mb-2">
             {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-gold fill-gold" />)}
-            <span className="ml-2 font-semibold text-foreground">5.0</span>
+            <span className="ml-2 font-semibold text-foreground">4.8</span>
             <a
               href="https://www.google.com/maps/place/Nauti+Buoy+Mauritius/@-19.9865975,57.6219534,17z/data=!4m8!3m7!1s0x217daba5efaa38d5:0xb27b4d681ecf3f15!8m2!3d-19.9865975!4d57.6219534!9m1!1b1!16s%2Fg%2F11z4_9bdjt"
               target="_blank"

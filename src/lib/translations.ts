@@ -76,7 +76,7 @@ export const T = {
   testimonials: {
     tag:    b('Avis Clients', 'Guest Reviews'),
     title:  b('Ce Que Disent Nos Clients', 'What Our Guests Say'),
-    count:  b('28 avis sur Google', '28 reviews on Google'),
+    count:  b('32 avis sur Google', '32 reviews on Google'),
   },
 
   pricing: {

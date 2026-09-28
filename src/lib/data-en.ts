@@ -178,8 +178,8 @@ export const PRICING_PLANS_EN: PricingPlan[] = [
   },
   {
     name: 'Full Day — Private',
-    price: '24,000',
-    priceNote: '+ Rs 1,200 / additional guest',
+    price: '26,000',
+    priceNote: '+ Rs 1,500 / additional guest',
     currency: 'Rs ',
     per: 'for 2 guests',
     description: 'Exclusive boat use with customizable itinerary, at your own pace.',

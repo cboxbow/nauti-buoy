@@ -313,8 +313,8 @@ export const PRICING_PLANS: PricingPlan[] = [
   },
   {
     name: 'Full Day — Privatisé',
-    price: '24 000',
-    priceNote: '+ Rs 1 200 / personne additionnelle',
+    price: '26 000',
+    priceNote: '+ Rs 1 500 / personne additionnelle',
     currency: 'Rs ',
     per: 'pour 2 personnes',
     description: 'Usage exclusif du bateau avec itinéraire personnalisable, à votre rythme.',

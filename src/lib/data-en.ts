@@ -146,7 +146,7 @@ export const TIMELINE_EN: TimelineItem[] = [
 export const PRICING_PLANS_EN: PricingPlan[] = [
   {
     name: 'Full Day — Shared',
-    price: '2,500',
+    price: '3,000',
     currency: 'Rs ',
     per: 'per person',
     description: 'Join a small group for an unforgettable day in the Northern lagoon.',

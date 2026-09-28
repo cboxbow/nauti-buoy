@@ -281,7 +281,7 @@ export const TESTIMONIALS: Testimonial[] = [
 export const PRICING_PLANS: PricingPlan[] = [
   {
     name: 'Full Day — Partagé',
-    price: '2 500',
+    price: '3 000',
     currency: 'Rs ',
     per: 'par personne',
     description: 'Rejoignez un petit groupe pour une journée inoubliable dans le lagon du Nord.',

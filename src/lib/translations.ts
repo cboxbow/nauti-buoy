@@ -18,7 +18,7 @@ export const T = {
     tagline: b('Nord Mauritius · Excursions en mer', 'North Mauritius · Sea Excursions'),
     depart:  b('Départ : Cap Malheureux · 8h30', 'Departure: Cap Malheureux · 8:30 AM'),
     rights:  b('© 2026 Nauti Buoy Mauritius. Tous droits réservés.', '© 2026 Nauti Buoy Mauritius. All rights reserved.'),
-    from:    b('À partir de Rs 2 500 / pers.', 'From Rs 2,500 / person'),
+    from:    b('À partir de Rs 3 000 / pers.', 'From Rs 3,000 / person'),
   },
 
   hero: {
@@ -158,7 +158,7 @@ export const T = {
     tarifs: {
       tag:   b('Tarifs', 'Pricing'),
       title: b('Prix Clairs & Transparents', 'Clear & Transparent Pricing'),
-      sub:   b('Partagé Rs 2 500/pers. · Privatisé dès Rs 24 000 pour 2 personnes — BBQ complet, boissons & snorkeling inclus. Paiement sur place.', 'Shared Rs 2,500/person · Private from Rs 24,000 for 2 — full BBQ, drinks & snorkeling included. Pay on site.'),
+      sub:   b('Partagé Rs 3 000/pers. · Privatisé dès Rs 24 000 pour 2 personnes — BBQ complet, boissons & snorkeling inclus. Paiement sur place.', 'Shared Rs 3,000/person · Private from Rs 24,000 for 2 — full BBQ, drinks & snorkeling included. Pay on site.'),
     },
     contact: {
       tag:   b('Contact', 'Contact'),

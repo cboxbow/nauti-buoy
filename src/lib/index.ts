@@ -269,11 +269,11 @@ export const TESTIMONIALS: Testimonial[] = [
     avatar: 'KC',
   },
   {
-    name: 'Tessa de Chalain',
-    location: 'Local Guide · Google',
+    name: 'Yan Mackjoo',
+    location: 'Google Reviews',
     rating: 5,
-    text: "Great service, amazing experience. Very comfy speed boat. We went to flat island with friends and had a blast.",
-    avatar: 'TC',
+    text: "Memorable trip, very friendly staffs, food was excellent and the boat was really a Nauti Buoy!! Will definitely come back. Thank you to the team for creating memories.",
+    avatar: 'YM',
   },
 ];
 
